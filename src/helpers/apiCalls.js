@@ -1,6 +1,7 @@
 import storageRef from "../firebase/firebase";
 
-const apiUrl = "http://localhost:8000";
+// const apiUrl = "http://localhost:8000";
+const apiUrl = "https://club20.herokuapp.com";
 
 const APIService = {
   async getPdfUrl(file) {

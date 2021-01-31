@@ -4,6 +4,7 @@ import RegisterForEvent from "./parts/RegisterForEvent";
 import { format, addDays } from "date-fns";
 // import { apiUrl } from "../../helpers/backend";
 import { Button } from "semantic-ui-react";
+import APIService from "../../helpers/apiCalls";
 import { Link } from "react-router-dom";
 
 function EventPage(props) {
@@ -20,14 +21,17 @@ function EventPage(props) {
   const id = props.match.params.eventId;
 
   const event =
-    events[0] !== undefined
-      ? events[0].find((one) => id === one.eventId)
-      : undefined;
+    events !== undefined ? events.find((one) => id === one.eventId) : undefined;
 
   console.log(event);
 
   useEffect(() => {
-    // fetchEvents();
+    const getEvents = async () => {
+      const eventsList = await APIService.getEvents();
+      setEvents(eventsList);
+    };
+
+    getEvents();
   }, []);
   return (
     <div className="event-page">

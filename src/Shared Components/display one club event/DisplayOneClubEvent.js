@@ -29,7 +29,7 @@ function ClubEvents(props) {
     return arr;
   };
 
-  bubbleSort(events[0]);
+  bubbleSort(events);
 
   const today = new Date();
 
@@ -45,7 +45,7 @@ function ClubEvents(props) {
     });
   };
 
-  passedDate(events[0]);
+  passedDate(events);
 
   console.log(passed);
 

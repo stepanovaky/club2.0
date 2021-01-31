@@ -16,7 +16,8 @@ function RegisterEvent() {
 
   return (
     <div className="register-event">
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      {/* onSubmit={handleSubmit(onSubmit)} */}
+      <Form>
         <Container>
           <Form.Group widths="equal">
             <Form.Field>

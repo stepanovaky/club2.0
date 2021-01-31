@@ -62,7 +62,8 @@ function FindDog() {
 
   return (
     <div className="find-owner">
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      {/* onSubmit={handleSubmit(onSubmit)} */}
+      <Form>
         <Container>
           <Form.Group widths="equal">
             <Form.Field>

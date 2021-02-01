@@ -3,31 +3,18 @@ import { useForm } from "react-hook-form";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { Form, Button, Container } from "semantic-ui-react";
+import APIService from "../helpers/apiCalls";
 
 function FindDog() {
   const [owner, setOwner] = useState([]);
   const { register, handleSubmit, errors } = useForm();
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   const fetchOwner = await fetch(`${apiUrl}/api/find/owner`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       data: JSON.stringify(data),
-  //     },
-  //   });
-  //   const response = fetchOwner;
 
-  //   if (response.status === 200) {
-  //     const fetchResponse = await response.json();
-  //     console.log(fetchResponse);
-  //     setOwner([JSON.parse(fetchResponse.message)]);
-  //   }
-  //   if (response.status === 400) {
-  //     const fetchResponse = await response.json();
-  //     console.log(fetchResponse);
-  //   }
-  // };
+  const onSubmit = async (data) => {
+    const res = await APIService.findOwner(data);
+    const response = await res.json();
+    console.log(response);
+    setOwner([response.owner]);
+  };
 
   const displayOwner = owner.map((o) => {
     console.log(o);
@@ -40,13 +27,13 @@ function FindDog() {
           {o.emailValid ? "Email is validated" : "Email yet to be validated"}
         </li>
         <li>Owner ID: {o.id}</li>
-        <li>Mobile phone number: {o.phoneNumberMobile}</li>
-        <li>Home phone number: {o.phoneNumberLandline}</li>
+        <li>Mobile phone number: {o.mobile}</li>
+        <li>Home phone number: {o.landline}</li>
         <li>
           Address: {o.address} {o.city}, {o.state} {o.zipCode}{" "}
         </li>
 
-        <li>
+        {/* <li>
           Dog Ids:{" "}
           {
             <ol>
@@ -55,18 +42,17 @@ function FindDog() {
               })}
             </ol>
           }
-        </li>
+        </li> */}
       </ul>
     );
   });
 
   return (
     <div className="find-owner">
-      {/* onSubmit={handleSubmit(onSubmit)} */}
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Container>
           <Form.Group widths="equal">
-            <Form.Field>
+            {/* <Form.Field>
               <label>
                 Owner type:
                 <select name="findOwnerType" ref={register}>
@@ -74,13 +60,12 @@ function FindDog() {
                   <option value="secondary">Secondary</option>
                 </select>
               </label>
-            </Form.Field>
+            </Form.Field> */}
             <Form.Field>
               <label>
                 Find owner by:
                 <select name="findOwner" ref={register}>
                   <option value="email">Email * preferred</option>
-                  <option value="id"> ID</option>
                 </select>
               </label>
             </Form.Field>

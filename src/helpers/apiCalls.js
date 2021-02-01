@@ -38,14 +38,30 @@ const APIService = {
     });
     return getRequest;
   },
+  async findOwner(data) {
+    const getRequest = await fetch(`${apiUrl}/api/find/owner`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        data: JSON.stringify(data),
+      },
+    });
+    return getRequest;
+  },
   async getEvents() {
     const getRequest = await fetch(`${apiUrl}/api/get/events`);
     const response = await getRequest.json();
     console.log(response);
     return response.events;
-    // const responseParsed = JSON.parse(response.events);
-    // console.log(responseParsed);
-    // return responseParsed;
+  },
+  async updateEvents(data) {
+    const updateRequest = await fetch(`${apiUrl}/api/update/events`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
   },
   async getLogs() {
     const getLogs = await fetch(`${apiUrl}/api/get/all/logs`);

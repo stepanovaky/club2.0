@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { format, addDays } from "date-fns";
 import { Form, Button, Container } from "semantic-ui-react";
+import APIService from "../helpers/apiCalls";
 
 function FindEvent() {
   const [events, setEvents] = useState([]);
@@ -15,9 +16,14 @@ function FindEvent() {
   //   setEvents([responseParsed]);
   // };
 
-  // useEffect(() => {
-  //   fetchEvents();
-  // }, []);
+  useEffect(() => {
+    const getEvents = async () => {
+      const eventsList = await APIService.getEvents();
+      setEvents(eventsList);
+    };
+
+    getEvents();
+  }, []);
 
   const sortedOptions = (arr) => {
     console.log(arr);
@@ -39,12 +45,12 @@ function FindEvent() {
     //
   };
 
-  sortedOptions(events[0]);
-  console.log(events[0]);
+  sortedOptions(events);
+  console.log(events);
 
   const eventsOptions =
-    events[0] !== undefined
-      ? events[0].map((option) => {
+    events !== undefined
+      ? events.map((option) => {
           return (
             <option key={option.eventId} value={option.eventId}>
               {option.eventName},{" "}
@@ -56,17 +62,20 @@ function FindEvent() {
 
   const handleOptionChange = () => {
     const select = document.getElementById("eventOption");
-    const theEvent = events[0].find((event) => select.value === event.eventId);
+    const theEvent = events.find((event) => select.value === event.eventId);
     setSelectedEvent(theEvent);
   };
 
-  const handleSubmit = () => {};
+  const onSubmit = async (data) => {
+    console.log(data);
+    const url = await APIService.getPdfUrl(data.eventPdf);
+    data.eventPdfUrl = url;
+    console.log(data);
+    console.log(url);
+    const res = await APIService.updateEvents(data);
+  };
 
-  const onSubmit = () => {};
-
-  const register = [];
-
-  // const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   // const onSubmit = async (data) => {
   //   console.log(data);
   //   if (data.eventPdf === undefined || data.eventPdf.length === 0) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { apiUrl } from "../../helpers/backend";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { addDays } from "date-fns";
+import APIService from "../../helpers/apiCalls";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -10,22 +11,18 @@ function MyCalendar(props) {
 
   const [events, setEvents] = useState([]);
 
-  //api call to get all events
-  //   const fetchEvents = async () => {
-  //     const getRequest = await fetch(`${apiUrl}/api/events`);
-
-  //     const response = await getRequest.json();
-  //     const responseParsed = JSON.parse(response.events);
-  //     setEvents([responseParsed]);
-  //   };
-
   useEffect(() => {
-    // fetchEvents();
+    const getEvents = async () => {
+      const eventsList = await APIService.getEvents();
+      setEvents(eventsList);
+    };
+
+    getEvents();
   }, []);
 
   const mapEvents =
-    events[0] !== undefined
-      ? events[0].map((one) => {
+    events !== undefined
+      ? events.map((one) => {
           return {
             title: one.name,
             start: addDays(new Date(one.startDate), 1),

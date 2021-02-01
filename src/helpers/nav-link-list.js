@@ -5,4 +5,5 @@ export const pageLinks = [
   { page: "Calendar", link: "/calendar" },
   { page: "Results", link: "/results" },
   { page: "Merchandise", link: "/merchandise" },
+  { page: "Resources", link: "/resources" },
 ];

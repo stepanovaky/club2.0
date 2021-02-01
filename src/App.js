@@ -12,6 +12,7 @@ import Confirmation from "./Pages/confirmation/Confirmation";
 import ListEvents from "./Pages/events/ListEvents";
 import DisplaySelectedEvent from "./Pages/event page/DisplaySelectedEvent";
 import Calendar from "./Pages/calendar/Calendar";
+import Resources from "./Pages/resources/Resources";
 import Admin from "./Hidden/Admin";
 import "./modal.scss";
 import "./main.scss";
@@ -31,6 +32,7 @@ function App() {
           <Route path="/results" component={Results} />
           <Route path="/merchandise" component={Merchandise} />
           <Route path="/confirm" component={Confirmation} />
+          <Route path="/resources" component={Resources} />
           {/* Admin compontents */}
           <Route path="/admin" component={Admin} />
           {/*  */}

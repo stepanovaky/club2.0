@@ -1,7 +1,7 @@
 import APIService from "./apiCalls";
 
 const DataService = {
-  async registerForClubSanction(info) {
+  registerForClubSanction(info) {
     console.log(info);
     const owner = info.data.owner;
     const dogs = info.data.dogs;

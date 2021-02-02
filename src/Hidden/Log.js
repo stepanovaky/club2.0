@@ -25,7 +25,7 @@ function Log() {
   const [postsPerPage, setPostsPerPage] = useState(20);
   const [pageNumbers, setPageNumbers] = useState([]);
 
-  console.log(logs);
+  // console.log(logs);
 
   const bubbleSort = (arr) => {
     let temp;
@@ -47,6 +47,16 @@ function Log() {
 
   const sortedLogs = bubbleSort(logs);
   console.log(sortedLogs);
+
+  const thing = (log) => {
+    for (let i = 0; i < log.length; i++) {
+      if (log[i] === log[i - 1]) {
+        console.log("same");
+      }
+    }
+  };
+
+  thing(sortedLogs);
 
   //figure out code to remove duplicates
 
@@ -215,7 +225,7 @@ function Log() {
     );
   });
 
-  console.log(rows);
+  // console.log(rows);
 
   return (
     <div className="log">
@@ -245,9 +255,9 @@ function Log() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, index) => {
+              {/* {rows.map((row, index) => {
                 console.log(row);
-              })}
+              })} */}
               {rows.map((row, index) => (
                 <Row key={index} row={row} />
               ))}

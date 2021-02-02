@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import { Container, Segment } from "semantic-ui-react";
+import { apiContext } from "../../../App";
 
 function PaymentContainer(props) {
+  const [api, setApi] = useContext(apiContext);
+
   return (
     <Segment>
       <Container>
@@ -22,6 +25,7 @@ function PaymentContainer(props) {
             }}
             onSuccess={(details, data) => {
               props.handleSuccess(details, data);
+              setApi(api + 1);
             }}
           />
         </div>

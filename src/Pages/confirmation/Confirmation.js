@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ClubRegistrationConfirmation from "./parts/ClubRegistrationConfirmation";
 import SanctionedEventRegistration from "./parts/SanctionedEventRegistration";
 import UnsanctionedEventRegistration from "./parts/UnsanctionedEventRegistration";
 
 // import { PayPalButton } from "react-paypal-button-v2";
 // import { Container, Segment } from "semantic-ui-react";
+
 import PaymentContainer from "./parts/PaymentContainer";
 
 // const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
@@ -12,6 +13,8 @@ import PaymentContainer from "./parts/PaymentContainer";
 function ConfirmationPage(props) {
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState();
+  // const [counter, setCounter] = useState(0);
+  //if parent re-renders, child re-renders
 
   let numDogs;
 
@@ -39,11 +42,14 @@ function ConfirmationPage(props) {
     }
   }, []);
 
+  // let counter = 0;
+
   const handleSuccess = (details, data) => {
     setSuccess(true);
     setMessage(
       "Success! " + "Transaction completed by " + details.payer.name.given_name
     );
+    // setCounter(counter + 1);
   };
 
   return (

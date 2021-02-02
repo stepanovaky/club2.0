@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Header, Segment } from "semantic-ui-react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { format } from "date-fns";
-import DataService from "../../../helpers/data-service";
+import APIService from "../../../helpers/apiCalls";
+import { throttle, debounce } from "throttle-debounce";
+import { apiContext } from "../../../App";
+
 // import { storageRef } from "../../../firebase";
 // import { apiUrl } from "../../helpers/backend";
 
 function ClubRegistrationConfirmation(props) {
+  const [api, setApi] = useContext(apiContext);
   //   console.log(props);
   const success = props.success;
   const owner = props.data.owner;
@@ -14,6 +18,12 @@ function ClubRegistrationConfirmation(props) {
   const secondary = props.data.dogOwner;
   const handleNumDogs = props.handleNumDogs;
   //   console.log(owners, dogs, secondary);
+
+  const counter1 = props.counter;
+  console.log(props);
+
+  console.log(api);
+
   const {
     control,
     register,
@@ -33,53 +43,29 @@ function ClubRegistrationConfirmation(props) {
     name: "dogs",
   });
 
-  if (success) {
-    DataService.registerForClubSanction(theData);
-    // console.log("success");
-    // const transformedData = async () => {
-    //   const urlList = [];
-    //   for await (let dog of theData.data.dogs) {
-    //     console.log(dog);
-    //     if (dog.file === undefined || dog.file.length === 0) {
-    //       console.log("thing");
-    //       urlList.push({ ...dog, akcPapersUrl: "" });
-    //     } else {
-    //       console.log("boo");
-    //       //   .then((res) => {
-    //       //     ;
-    //       //   });
-    //       const uploadTask = await storageRef
-    //         .child(`dog/${dog.akcNumber}/${dog.file[0].name}`)
-    //         .put(dog.file[0]);
-    //       const akcPapersUrl = await uploadTask.ref.getDownloadURL();
-    //       urlList.push({ ...dog, akcPapersUrl });
-    //     }
-    //   }
-    //   console.log(urlList);
-    //   return urlList;
-    // };
-    // transformedData()
-    //   .then((res) => {
-    //     const data = { ...theData.data, transformed: res };
-    //     return data;
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     setTimeout(function () {
-    //       sendRegistration(res);
-    //     }, 500);
-    //   });
-    // //  };
-    // const sendRegistration = async (data) => {
-    //   console.log("boo");
-    //   const postData = await fetch(`${apiUrl}/api/registration`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
-    // };
+  //counter, if the counter is not zero, don't make api call
+  //^ not great
+
+  //execute only when payment process is done
+  //fires off when component re-renders
+
+  if (success && api === 0) {
+    console.log("call");
+
+    dogs.map((dog, index) => {
+      if (dog.file === undefined || dog.file.length === 0) {
+        console.log("thing");
+      } else {
+        APIService.getPdfUrl(dog.file).then((res) => {
+          dogs[index].pdfUrl = res;
+        });
+      }
+    });
+    console.log(dogs);
+    APIService.registerDogAndOwner({ data: { owner, dogs, secondary } });
+    setApi(api + 1);
+  } else {
+    console.log("call stopped");
   }
 
   const onSubmit = async (form) => {
@@ -105,7 +91,6 @@ function ClubRegistrationConfirmation(props) {
 
   //   const amountOfDogs = dogs.length;
   //   const paymentAmount = 15.0 * amountOfDogs;
-
   return (
     <div className="club-registration-confirmation">
       <div className="container">

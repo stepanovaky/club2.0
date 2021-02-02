@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Shared Components/header/Header";
 import Footer from "./Shared Components/footer/Footer";
@@ -17,7 +17,16 @@ import Admin from "./Hidden/Admin";
 import "./modal.scss";
 import "./main.scss";
 
+export const apiContext = React.createContext();
+
 function App() {
+  const [api, setApi] = useState(0);
+  const [counter, setCounter] = useState();
+
+  const handleCounter = () => {
+    setCounter(counter + 1);
+  };
+
   return (
     <div className="app">
       <Router>
@@ -30,13 +39,15 @@ function App() {
           <Route path="/eventpage/:eventId" component={DisplaySelectedEvent} />
           <Route path="/calendar" component={Calendar} />
           <Route path="/results" component={Results} />
-          <Route path="/merchandise" component={Merchandise} />
-          <Route path="/confirm" component={Confirmation} />
-          <Route path="/resources" component={Resources} />
-          {/* Admin compontents */}
+          <Route path="/merchandise" component={Merchandise} />{" "}
           <Route path="/admin" component={Admin} />
           {/*  */}
           <Route component={NotFound} />
+          <apiContext.Provider value={[api, setApi]}>
+            <Route path="/confirm" component={Confirmation} />
+          </apiContext.Provider>
+          <Route path="/resources" component={Resources} />
+          {/* Admin compontents */}
         </Switch>
         <Footer />
       </Router>

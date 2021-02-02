@@ -41,13 +41,12 @@ function App() {
           <Route path="/results" component={Results} />
           <Route path="/merchandise" component={Merchandise} />{" "}
           <Route path="/admin" component={Admin} />
-          {/*  */}
-          <Route component={NotFound} />
+          <Route path="/resources" component={Resources} />
           <apiContext.Provider value={[api, setApi]}>
             <Route path="/confirm" component={Confirmation} />
           </apiContext.Provider>
-          <Route path="/resources" component={Resources} />
           {/* Admin compontents */}
+          <Route component={NotFound} />
         </Switch>
         <Footer />
       </Router>

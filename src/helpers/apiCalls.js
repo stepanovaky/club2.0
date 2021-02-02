@@ -2,8 +2,8 @@ import { getOverlappingDaysInIntervals } from "date-fns";
 import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
 
-const apiUrl = "http://localhost:8000";
-// const apiUrl = "https://club20.herokuapp.com";
+// const apiUrl = "http://localhost:8000";
+const apiUrl = "https://club20.herokuapp.com";
 window.localStorage.setItem("throttle", "true");
 const APIService = {
   async getPdfUrl(file) {
@@ -14,7 +14,6 @@ const APIService = {
   },
   async registerDogAndOwner(data) {
     console.log(window.localStorage.getItem("throttle"));
-    console.log("booo");
 
     if (window.localStorage.getItem("throttle") === "true") {
       fetch(apiUrl + "/api/first/registration", {

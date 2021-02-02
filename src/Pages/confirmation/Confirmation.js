@@ -16,6 +16,8 @@ function ConfirmationPage(props) {
   // const [counter, setCounter] = useState(0);
   //if parent re-renders, child re-renders
 
+  console.log(props);
+
   let numDogs;
 
   if (props.location.state.clubRegistration) {

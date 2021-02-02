@@ -19,13 +19,10 @@ import "./main.scss";
 
 export const apiContext = React.createContext();
 
-function App() {
+function App(props) {
   const [api, setApi] = useState(0);
-  const [counter, setCounter] = useState();
-
-  const handleCounter = () => {
-    setCounter(counter + 1);
-  };
+  const [counter, setCounter] = useState(props.counter);
+  // const [counter, setCounter] = useState();
 
   return (
     <div className="app">
@@ -42,7 +39,7 @@ function App() {
           <Route path="/merchandise" component={Merchandise} />{" "}
           <Route path="/admin" component={Admin} />
           <Route path="/resources" component={Resources} />
-          <apiContext.Provider value={[api, setApi]}>
+          <apiContext.Provider value={([api, setApi], [counter, setCounter])}>
             <Route path="/confirm" component={Confirmation} />
           </apiContext.Provider>
           {/* Admin compontents */}

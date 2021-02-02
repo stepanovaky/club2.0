@@ -11,6 +11,7 @@ import { apiContext } from "../../../App";
 
 function ClubRegistrationConfirmation(props) {
   const [api, setApi] = useContext(apiContext);
+  const [counter, setCounter] = useContext(apiContext);
   //   console.log(props);
   const success = props.success;
   const owner = props.data.owner;
@@ -49,7 +50,7 @@ function ClubRegistrationConfirmation(props) {
   //execute only when payment process is done
   //fires off when component re-renders
 
-  if (success && api === 0) {
+  if (success && api === 0 && counter === 0) {
     console.log("call");
 
     dogs.map((dog, index) => {
@@ -64,6 +65,7 @@ function ClubRegistrationConfirmation(props) {
     console.log(dogs);
     APIService.registerDogAndOwner({ data: { owner, dogs, secondary } });
     setApi(api + 1);
+    setCounter(counter + 1);
   } else {
     console.log("call stopped");
   }

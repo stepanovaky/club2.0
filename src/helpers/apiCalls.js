@@ -2,9 +2,9 @@ import { getOverlappingDaysInIntervals } from "date-fns";
 import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
 
-// const apiUrl = "http://localhost:8000";
-const apiUrl = "https://club20.herokuapp.com";
-
+const apiUrl = "http://localhost:8000";
+// const apiUrl = "https://club20.herokuapp.com";
+window.localStorage.setItem("throttle", "true");
 const APIService = {
   async getPdfUrl(file) {
     console.log(file);
@@ -13,17 +13,27 @@ const APIService = {
     return akcPapersUrl;
   },
   async registerDogAndOwner(data) {
-    console.log(data);
-    console.log(data.data);
-    fetch(apiUrl + "/api/first/registration", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        data: data.data,
-      }),
-    });
+    console.log(window.localStorage.getItem("throttle"));
+    console.log("booo");
+
+    if (window.localStorage.getItem("throttle") === "true") {
+      fetch(apiUrl + "/api/first/registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: data.data,
+        }),
+      });
+    }
+
+    window.localStorage.setItem("throttle", "false");
+    console.log(window.localStorage.getItem("throttle"));
+
+    setTimeout(function () {
+      window.localStorage.setItem("throttle", "true");
+    }, 60000);
 
     // const response = await APICall;
     // console.log(response.body);

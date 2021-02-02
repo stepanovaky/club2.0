@@ -7,6 +7,8 @@ function RenderDog(props) {
   const [message, setMessage] = useState();
   const dog = props.d;
 
+  console.log(props);
+
   const { register, handleSubmit, errors } = useForm();
   // const onSubmit = (data) => {
   //   if (data.akcNumber === undefined) {
@@ -105,7 +107,7 @@ function RenderDog(props) {
   // };
 
   return (
-    <div key={dog.id} className="render-dog">
+    <div key={dog.callName} className="render-dog">
       <Segment>
         <p>
           <strong>{dog.registeredName}</strong>
@@ -145,9 +147,9 @@ function RenderDog(props) {
           <Form.Group widths="equal">
             <Form.Field>
               <label>
-                AKC Number
+                Registration Number
                 <input
-                  defaultValue={dog.akcNumber}
+                  defaultValue={dog.registrationNumber}
                   type="text"
                   placeholder="AKC Number"
                   name="akcNumber"
@@ -173,28 +175,13 @@ function RenderDog(props) {
           <Form.Group widths="equal">
             <Form.Field>
               <label>
-                Dog ID
-                <input
-                  type="text"
-                  placeholder="id"
-                  name="id"
-                  ref={register}
-                  defaultValue={dog.id}
-                  disabled={isDisabled}
-                />
-              </label>
-            </Form.Field>
-            <Form.Field>
-              <label>
                 Registration Status
                 <input
                   type="text"
                   placeholder="Registration Status"
                   name="registered"
                   ref={register}
-                  defaultValue={
-                    dog.registered ? "Registered" : "Not registered"
-                  }
+                  defaultValue={dog.registrationStatus}
                   disabled={isDisabled}
                 />
               </label>
@@ -209,7 +196,7 @@ function RenderDog(props) {
                   placeholder="Registration Papers"
                   name="registrationPapersTypeP"
                   ref={register}
-                  defaultValue={dog.registrationPapersType}
+                  defaultValue={dog.registrationPapers}
                   disabled={isDisabled}
                 />
               </label>

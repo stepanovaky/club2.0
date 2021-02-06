@@ -5,11 +5,22 @@ import { Form, Button, Checkbox, Segment } from "semantic-ui-react";
 function RenderDog(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [message, setMessage] = useState();
-  const dog = props.d;
+  console.log(props);
+  const dog = props?.dog;
+  const owner = props?.owner;
 
   console.log(props);
 
   const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    if (isDisabled === true) {
+      setMessage("Please toggle to edit");
+    } else {
+      console.log(data);
+    }
+  };
   // const onSubmit = (data) => {
   //   if (data.akcNumber === undefined) {
   //     setMessage("Please toggle to edit");
@@ -77,8 +88,6 @@ function RenderDog(props) {
   //   }
   // };
 
-  const onSubmit = () => {};
-
   const onDelete = () => {};
 
   const handleDisabled = () => {
@@ -114,8 +123,7 @@ function RenderDog(props) {
         </p>
         <p>Toggle to edit fields or delete dog</p>{" "}
         <Checkbox toggle onChange={handleDisabled} />
-        {/* onSubmit={handleSubmit(onSubmit)} */}
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group widths="equal">
             <Form.Field>
               <label>
@@ -194,7 +202,7 @@ function RenderDog(props) {
                 <input
                   type="text"
                   placeholder="Registration Papers"
-                  name="registrationPapersTypeP"
+                  name="registrationPapersType"
                   ref={register}
                   defaultValue={dog.registrationPapers}
                   disabled={isDisabled}
@@ -217,27 +225,109 @@ function RenderDog(props) {
             )}
           </Form.Group>
           <Form.Group widths="equal">
-            {/* <label>
-              Primary Owner IDs
-              <ol>
-                {dog.primaryIds.map((id, index) => {
-                  return (
-                    <Form.Field key={index}>
-                      <input
-                        type="text"
-                        placeholder="Primary ID"
-                        name={`primaryIds[${index}]`}
-                        ref={register}
-                        defaultValue={id}
-                        disabled={isDisabled}
-                      />
-                    </Form.Field>
-                  );
-                })}
-              </ol>
-            </label> */}
+            <Form.Field>
+              <label>
+                Primary Owner
+                <input
+                  type="text"
+                  placeholder="Owner Name"
+                  name="ownerName"
+                  defaultValue={owner?.fullName}
+                  ref={register}
+                  disabled={isDisabled}
+                />
+              </label>
+            </Form.Field>
+            <Form.Field>
+              <label>
+                Primary Owner's Email
+                <input
+                  type="text"
+                  placeholder="Owner Email"
+                  name="ownerEmail"
+                  defaultValue={owner?.email}
+                  ref={register}
+                  disabled={isDisabled}
+                />
+              </label>
+            </Form.Field>
           </Form.Group>
           <Form.Group widths="equal">
+            <Form.Group>
+              {dog.secondaryOwners?.map((owner, index) => {
+                return (
+                  <>
+                    <Form.Field>
+                      <label>
+                        Secondary Owner Name {index + 1}
+                        <input
+                          type="text"
+                          placeholder="Secondary Owner Name"
+                          name={`secondary[${index}].ownerName`}
+                          defaultValue={owner.fullName}
+                          ref={register}
+                          disabled={isDisabled}
+                        />
+                      </label>
+                    </Form.Field>
+                    <Form.Field>
+                      <label>
+                        Secondary Owner Email {index + 1}
+                        <input
+                          type="text"
+                          placeholder="Secondary Owner Email"
+                          name={`secondary[${index}].ownerEmail`}
+                          defaultValue={owner.email}
+                          ref={register}
+                          disabled={isDisabled}
+                        />
+                      </label>
+                    </Form.Field>
+                  </>
+                );
+              })}
+            </Form.Group>
+            <Form.Group>
+              <Form.Field>
+                <label>
+                  Date
+                  <input
+                    type="date"
+                    placeholder="Date"
+                    name="date"
+                    ref={register}
+                    defaultValue={dog.registrationPapers}
+                    disabled={isDisabled}
+                  />
+                </label>
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Weight
+                  <input
+                    type="text"
+                    placeholder="Weight"
+                    name="weight"
+                    ref={register}
+                    defaultValue={dog.registrationPapers}
+                    disabled={isDisabled}
+                  />
+                </label>
+              </Form.Field>
+              <Form.Field>
+                <label>
+                  Time
+                  <input
+                    type="text"
+                    placeholder="Time"
+                    name="time"
+                    ref={register}
+                    defaultValue={dog.registrationPapers}
+                    disabled={isDisabled}
+                  />
+                </label>
+              </Form.Field>
+            </Form.Group>
             {/* <label>
               Secondary Owner IDs
               <ol>

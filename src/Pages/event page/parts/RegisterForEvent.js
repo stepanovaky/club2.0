@@ -33,12 +33,12 @@ function RegisterForEvent(props) {
       </p>
       {ifRegistered === undefined ? null : ifRegistered ? (
         <SanctionedRegistration
-          eventId={props.eventId}
+          eventId={props.id}
           sanctionedPrice={props.sanctionedPrice}
         />
       ) : (
         <UnsanctionedRegistration
-          eventId={props.eventId}
+          eventId={props.id}
           unsanctionedPrice={props.unsanctionedPrice}
         />
       )}

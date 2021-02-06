@@ -8,6 +8,7 @@ import APIService from "../helpers/apiCalls";
 function FindEvent() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState();
+  const [message, setMessage] = useState("");
   // const fetchEvents = async () => {
   //   const getRequest = await fetch(`${apiUrl}/api/events`);
 
@@ -67,12 +68,11 @@ function FindEvent() {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
     const url = await APIService.getPdfUrl(data.eventPdf);
     data.eventPdfUrl = url;
-    console.log(data);
-    console.log(url);
-    const res = await APIService.updateEvents(data);
+    const res = APIService.updateEvents(data);
+    console.log(res.status);
+    setMessage("Event successfully updated");
   };
 
   const { register, handleSubmit, errors } = useForm();
@@ -156,20 +156,6 @@ function FindEvent() {
                 />
               </label>
             </Form.Field>
-            {/* <Form.Field>
-              <label>
-                Event end date:
-                <input
-                  defaultValue={
-                    selectedEvent !== undefined ? selectedEvent.endDate : null
-                  }
-                  type="date"
-                  placeholder="End date"
-                  name="endDate"
-                  ref={register({ required: true })}
-                />
-              </label>
-            </Form.Field> */}
           </Form.Group>
           <Form.Group>
             <Form.Field>
@@ -195,42 +181,7 @@ function FindEvent() {
               </label>
             </Form.Field>
           </Form.Group>
-          {/* <Form.Group widths="equal"> */}
-          {/* <Form.Field>
-              <label>
-                Event address:
-                <input
-                  defaultValue={
-                    selectedEvent !== undefined
-                      ? selectedEvent.eventAddress
-                      : null
-                  }
-                  type="text"
-                  placeholder="Address"
-                  name="address"
-                  ref={register({ required: true })}
-                />
-              </label>
-            </Form.Field>
-          </Form.Group>
-          <Form.Group widths="equal">
-            <Form.Field>
-              <label>
-                Event description:
-                <input
-                  defaultValue={
-                    selectedEvent !== undefined
-                      ? selectedEvent.eventDescription
-                      : null
-                  }
-                  type="text"
-                  placeholder="Description"
-                  name="description"
-                  ref={register}
-                />
-              </label>
-            </Form.Field> */}
-          {/* </Form.Group> */}
+
           <Form.Group widths="equal">
             <Form.Field>
               <label>
@@ -244,20 +195,9 @@ function FindEvent() {
                 />
               </label>
             </Form.Field>
-            {/* <Form.Field>
-              <label>
-                {" "}
-                Add .pdf file
-                <input
-                  ref={register}
-                  name="eventPdf"
-                  type="file"
-                  accept="application/pdf"
-                />
-              </label>
-            </Form.Field> */}
           </Form.Group>
           <Button type="submit">Submit</Button>
+          <p>{message}</p>
         </Container>
       </Form>
     </div>

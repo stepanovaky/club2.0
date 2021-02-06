@@ -76,8 +76,8 @@ export default function Fields({ control, register, setValue, getValues }) {
                     <input
                       required
                       type="text"
-                      placeholder="AKC number"
-                      name={`dogs[${index}].akcNumber`}
+                      placeholder="Registration number"
+                      name={`dogs[${index}].registrationNumber`}
                       ref={register({ required: true })}
                     />
                   </label>

@@ -256,8 +256,8 @@ function UnsanctionedRegistration(props) {
                         <input
                           required
                           type="text"
-                          placeholder="AKC number"
-                          name={`dogs[${index}].akcNumber`}
+                          placeholder="Registration Number"
+                          name={`dogs[${index}].registrationNumber`}
                           ref={register({ required: true })}
                         />
                       </label>

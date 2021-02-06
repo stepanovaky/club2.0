@@ -353,12 +353,12 @@ function ClubRegistrationConfirmation(props) {
                   <Form.Group widths="equal">
                     <Form.Field>
                       <label>
-                        AKC Number
+                        Registration Number
                         <input
                           defaultValue={dog.akcNumber}
                           type="text"
-                          placeholder="AKC Number"
-                          name={`dogs[${index}].akcNumber`}
+                          placeholder="Registration Number"
+                          name={`dogs[${index}].registrationNumber`}
                           ref={register}
                           disabled={isDisabled}
                         />

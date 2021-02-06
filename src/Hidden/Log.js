@@ -170,8 +170,8 @@ function Log() {
                       <TableCell>Registration Papers URL </TableCell>
                       <TableCell>Breed </TableCell>
                       <TableCell>Gender </TableCell>
+                      <TableCell>DOB </TableCell>
                       <TableCell>Microchip </TableCell>
-                      <TableCell> </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

@@ -8,6 +8,7 @@ import APIService from "../helpers/apiCalls";
 
 function FindDog() {
   const [dog, setDog] = useState([]);
+  const [owner, setOwner] = useState();
   const [message, setMessage] = useState();
   const { register, handleSubmit, errors } = useForm();
 
@@ -15,9 +16,14 @@ function FindDog() {
     console.log(data);
     const res = await APIService.findDog(data);
     const response = await res.json();
-    setDog([response.dog]);
+    console.log(response);
+    console.log(response.dog);
+    setDog([response.dog.dog]);
+    setOwner(response.dog.owner);
     // const response = JSON.parse(res);
   };
+
+  console.log(owner);
 
   const displayDog =
     dog.length >= 1 && dog !== undefined
@@ -26,7 +32,7 @@ function FindDog() {
         : dog.map((d, index) => {
             return (
               <div key={index}>
-                <RenderDog d={d} />
+                <RenderDog dog={d} owner={owner} />
               </div>
             );
           })
@@ -45,7 +51,9 @@ function FindDog() {
                     {" "}
                     Call Name * preferred
                   </option>
-                  <option value="akcNumber">AKC Number</option>
+                  <option value="registrationNumber">
+                    Registration Number
+                  </option>
                   <option value="registeredName">Registered Name</option>
                   <option value="sanctionId"> Sanction ID</option>
                 </select>

@@ -11,6 +11,7 @@ import {
 } from "semantic-ui-react";
 // import { apiUrl } from "../../../helpers/backend";
 import { useHistory } from "react-router-dom";
+import APIService from "../../../helpers/apiCalls";
 
 function SanctionedRegistration(props) {
   console.log(props);
@@ -33,101 +34,82 @@ function SanctionedRegistration(props) {
     });
   };
 
-  //   const findDogByCallName = () => {
-  //     const callName = document.getElementById("call");
-  //     console.log(callName.value);
+  const findDogByCallName = () => {
+    const callName = document.getElementById("call").value;
+    console.log(callName);
 
-  //     for (const dog of addedDogs) {
-  //       console.log(dog);
-  //       if (callName.value === dog.callName) {
-  //         // console.log("true");
-  //         setRepeatMessage("Dog already added");
-  //         setDisableAddDog(true);
-  //       } else if (callName !== dog.callName) {
-  //         setDisableAddDog(false);
-  //         // console.log("false");
-  //         setRepeatMessage("");
-  //       }
-  //     }
-  //     fetchDogByCallName(callName.value.toLowerCase());
-  //   };
+    for (const dog of addedDogs) {
+      if (callName === dog.callName) {
+        // console.log("true");
+        setRepeatMessage("Dog already added");
+        setDisableAddDog(true);
+      } else if (callName !== dog.callName) {
+        setDisableAddDog(false);
+        // console.log("false");
+        setRepeatMessage("");
+      }
+    }
+    fetchDogByCallName(callName.toLowerCase());
+  };
 
-  //   const findDogBySanctionId = () => {
-  //     const sanctionId = document.getElementById("sanction");
-  //     console.log(sanctionId.value);
+  const fetchDogByCallName = async (name) => {
+    console.log(name);
+    const res = await APIService.findDog({
+      findDogs: "callName * preferred",
+      dogItem: name,
+    });
+    const response = await res.json();
+    setSanction(response.dog?.dog?.sanctionId);
 
-  //     for (const dog of addedDogs) {
-  //       console.log(dog);
-  //       if (sanctionId.value === dog.sanctionId) {
-  //         // console.log("true");
-  //         setRepeatMessage("Dog already added");
-  //         setDisableAddDog(true);
-  //       } else if (sanctionId.value !== dog.sanctionId) {
-  //         setDisableAddDog(false);
-  //         // console.log("false");
-  //         setRepeatMessage("");
-  //       }
-  //     }
-  //     fetchDogBySanctionId(sanctionId.value.toLowerCase());
-  //   };
+    //findDogs: callName * preferred
+    //dogItem: name
+  };
 
-  //   const addSanctionedDog = (data) => {
-  //     console.log(data);
-  //     // setCallName("");
-  //     // setSanction("");
-  //     setSanction("");
+  //
 
-  //     document.getElementById("form").reset();
+  const findDogBySanctionId = () => {
+    const sanctionId = document.getElementById("sanction").value;
+    console.log(sanctionId.value);
 
-  //     setAddedDogs((addedDogs) => [...addedDogs, data]);
-  //     console.log(addedDogs);
-  //   };
+    for (const dog of addedDogs) {
+      if (sanctionId === dog.sanctionId) {
+        // console.log("true");
+        setRepeatMessage("Dog already added");
+        setDisableAddDog(true);
+      } else if (sanctionId !== dog.sanctionId) {
+        setDisableAddDog(false);
+        // console.log("false");
+        setRepeatMessage("");
+      }
+    }
+    fetchDogBySanctionId(sanctionId.toLowerCase());
+  };
 
-  //   const resetAddedDogs = () => {
-  //     setAddedDogs([]);
-  //   };
+  const fetchDogBySanctionId = async (sanctionId) => {
+    const res = await APIService.findDog({
+      findDogs: "sanctionId",
+      dogItem: sanctionId,
+    });
+    const response = await res.json();
+    console.log(response);
+    setCallName(response.dog?.dog?.callName);
+  };
 
-  //   const fetchDogByCallName = async (name) => {
-  //     const fetchDogByCallName = await fetch(
-  //       `${apiUrl}/api/register/event/sanctioned/callname`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           dog: JSON.stringify(name),
-  //         },
-  //       }
-  //     );
-  //     const response = await fetchDogByCallName.json();
-  //     console.log(response.message);
-  //     if (response.message === "No such dog") {
-  //       setSanction("");
-  //       setMessage(response.message);
-  //     } else {
-  //       setMessage();
-  //       setSanction(response.message);
-  //     }
-  //   };
+  const addSanctionedDog = (data) => {
+    console.log(data);
+    setCallName("");
+    setSanction("");
+    setSanction("");
 
-  //   const fetchDogBySanctionId = async (id) => {
-  //     const fetchDogBySanctionId = await fetch(
-  //       `${apiUrl}/api/register/event/sanctioned/sanctionid`,
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           dog: JSON.stringify(id),
-  //         },
-  //       }
-  //     );
-  //     const response = await fetchDogBySanctionId.json();
-  //     console.log(response.message);
-  //     if (response.message === "No such dog") {
-  //       setCallName("");
-  //       setMessage(response.message);
-  //     } else {
-  //       setMessage();
-  //       setCallName(response.message);
-  //     }
-  //   };
+    document.getElementById("form").reset();
+
+    setAddedDogs((addedDogs) => [...addedDogs, data]);
+    console.log(addedDogs);
+  };
+
+  const resetAddedDogs = () => {
+    setAddedDogs([]);
+  };
 
   return (
     <div className="sanctioned-registration">
@@ -138,7 +120,7 @@ function SanctionedRegistration(props) {
               <label>
                 Call Name *
                 <input
-                  //   onChange={findDogByCallName}
+                  onChange={findDogByCallName}
                   id="call"
                   type="text"
                   defaultValue={callNameOfDog}
@@ -155,7 +137,7 @@ function SanctionedRegistration(props) {
                 Sanction ID
                 <input
                   id="sanction"
-                  //   onChange={findDogBySanctionId}
+                  onChange={findDogBySanctionId}
                   required
                   type="text"
                   defaultValue={sanction}
@@ -169,7 +151,7 @@ function SanctionedRegistration(props) {
           <Button.Group>
             <Button
               disabled={disableAddDog}
-              //   onClick={handleSubmit(addSanctionedDog)}
+              onClick={handleSubmit(addSanctionedDog)}
             >
               Add Dog
             </Button>
@@ -208,7 +190,7 @@ function SanctionedRegistration(props) {
                 </Table.Body>
               </Table>
               <Button.Group>
-                {/* <Button onClick={resetAddedDogs}>Reset</Button> */}
+                <Button onClick={resetAddedDogs}>Reset</Button>
                 <Button.Or />
                 <Button onClick={onSubmit}>Submit</Button>
               </Button.Group>

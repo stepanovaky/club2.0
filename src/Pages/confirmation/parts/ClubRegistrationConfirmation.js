@@ -53,19 +53,27 @@ function ClubRegistrationConfirmation(props) {
   if (success && api === 0 && counter === 0) {
     console.log("call");
 
-    dogs.map((dog, index) => {
-      if (dog.file === undefined || dog.file.length === 0) {
-        console.log("thing");
-      } else {
-        APIService.getPdfUrl(dog.file).then((res) => {
-          dogs[index].pdfUrl = res;
-        });
-      }
-    });
-    console.log(dogs);
-    APIService.registerDogAndOwner({ data: { owner, dogs, secondary } });
-    setApi(api + 1);
-    setCounter(counter + 1);
+    const sendDogData = async () => {
+      await dogs.map((dog, index) => {
+        if (dog.file === undefined || dog.file.length === 0) {
+          console.log("thing");
+        } else {
+          // const url = await APIService.getPdfUrl(dog.file)
+          // dogs[index].url = await url
+          APIService.getPdfUrl(dog.file).then((res) => {
+            // console.log(res);
+            dogs[index].pdfUrl = res;
+          });
+        }
+      });
+      const dogsFixed = await dogs;
+      console.log(dogsFixed);
+      APIService.registerDogAndOwner({ data: { owner, dogs, secondary } });
+      setApi(api + 1);
+      setCounter(counter + 1);
+    };
+
+    sendDogData();
   } else {
     console.log("call stopped");
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import OwnerArray from "./parts/OwnerArray";
 import DogArray from "./parts/DogArray";
@@ -6,6 +6,13 @@ import { Container, Header, Button, Form } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 function NestedRegistrationForm() {
+  const [send, setSend] = useState(true);
+  const [message, setMessage] = useState();
+
+  const handleSend = (value) => {
+    setSend(value);
+  };
+
   const {
     control,
     register,
@@ -15,8 +22,15 @@ function NestedRegistrationForm() {
     setValue,
   } = useForm();
   const history = useHistory();
+
   const onSubmit = async (data) => {
-    history.push("/confirm", { clubRegistration: data });
+    if (send === true) {
+      history.push("/confirm", { clubRegistration: data });
+    } else if (send === false) {
+      setMessage(
+        "Please change the call name of one or more of your dogs to register"
+      );
+    }
   };
 
   return (
@@ -38,8 +52,11 @@ function NestedRegistrationForm() {
             <OwnerArray
               {...{ control, register, getValues, setValue, errors }}
             />
-            <DogArray {...{ control, register, getValues, setValue, errors }} />
-            <Button type="submit"> Submit </Button>{" "}
+            <DogArray
+              handleSend={handleSend}
+              {...{ control, register, getValues, setValue, errors }}
+            />
+            <Button type="submit"> Submit </Button> <p>{message}</p>
           </Form>{" "}
         </Container>
       </div>

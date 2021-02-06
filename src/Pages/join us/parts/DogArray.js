@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useFieldArray } from "react-hook-form";
 import SecondaryOwnerArray from "./SecondaryOwnerArray";
 import { Form, Button, Segment, Divider } from "semantic-ui-react";
+import APIService from "../../../helpers/apiCalls";
 
-export default function Fields({ control, register, setValue, getValues }) {
+export default function Fields({
+  control,
+  register,
+  setValue,
+  getValues,
+  handleSend,
+}) {
   const [dogName, setDogName] = useState("");
+  const [message, setMessage] = useState();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "dogs",
@@ -23,6 +31,31 @@ export default function Fields({ control, register, setValue, getValues }) {
   useEffect(() => {
     addDog();
   }, []);
+
+  const findDogByCallName = () => {
+    const callName = document.getElementById("call").value;
+    console.log(callName);
+    fetchDogByCallName(callName.toLowerCase());
+  };
+
+  const fetchDogByCallName = async (name) => {
+    console.log(name);
+    const res = await APIService.findDog({
+      findDogs: "callName * preferred",
+      dogItem: name,
+    });
+    const response = await res.json();
+    console.log(response);
+    if (response.dog?.dog) {
+      setMessage("Call Name Taken");
+      handleSend(false);
+    } else {
+      setMessage("");
+      handleSend(true);
+    }
+    //findDogs: callName * preferred
+    //dogItem: name
+  };
 
   return (
     <>
@@ -60,13 +93,16 @@ export default function Fields({ control, register, setValue, getValues }) {
                   <label>
                     Call name *
                     <input
+                      onChange={findDogByCallName}
                       required
+                      id="call"
                       type="text"
                       placeholder="Call name"
                       name={`dogs[${index}].callName`}
                       ref={register({ required: true })}
                     />
                   </label>
+                  <p>{message}</p>
                 </Form.Field>
               </Form.Group>
               <Form.Group widths="equal">

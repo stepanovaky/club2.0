@@ -14,6 +14,7 @@ const APIService = {
   },
   async registerDogAndOwner(data) {
     console.log(window.localStorage.getItem("throttle"));
+    console.log(JSON.stringify({ data: data.data }));
 
     if (window.localStorage.getItem("throttle") === "true") {
       fetch(apiUrl + "/api/first/registration", {

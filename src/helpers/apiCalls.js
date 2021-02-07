@@ -1,6 +1,7 @@
 import { getOverlappingDaysInIntervals } from "date-fns";
 import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
+import UnsanctionedRegistration from "../Pages/event page/parts/UnsanctionedRegistration";
 
 const apiUrl = "http://localhost:8000";
 // const apiUrl = "https://club20.herokuapp.com";
@@ -49,6 +50,15 @@ const APIService = {
     });
     // return getRequest;
   },
+  async updateDog(data) {
+    fetch(`${apiUrl}/api/update/dog`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+  },
   async findOwner(data) {
     const getRequest = await fetch(`${apiUrl}/api/find/owner`, {
       method: "GET",
@@ -80,6 +90,24 @@ const APIService = {
     console.log(object);
     if (window.localStorage.getItem("throttle") === "true") {
       await fetch(`${apiUrl}/api/sanctioned/event/registration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(object),
+      });
+    }
+    window.localStorage.setItem("throttle", "false");
+    console.log(window.localStorage.getItem("throttle"));
+
+    setTimeout(function () {
+      window.localStorage.setItem("throttle", "true");
+    }, 60000);
+  },
+  async unsanctionedRegistration(object) {
+    console.log(object);
+    if (window.localStorage.getItem("throttle") === "true") {
+      await fetch(`${apiUrl}/api/unsanctioned/event/registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

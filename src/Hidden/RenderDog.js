@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Checkbox, Segment } from "semantic-ui-react";
+import APIService from "../helpers/apiCalls";
 
 function RenderDog(props) {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -19,6 +20,7 @@ function RenderDog(props) {
       setMessage("Please toggle to edit");
     } else {
       console.log(data);
+      APIService.updateDog(data);
     }
   };
   // const onSubmit = (data) => {
@@ -287,47 +289,50 @@ function RenderDog(props) {
                 );
               })}
             </Form.Group>
-            <Form.Group>
-              <Form.Field>
-                <label>
-                  Date
-                  <input
-                    type="date"
-                    placeholder="Date"
-                    name="date"
-                    ref={register}
-                    defaultValue={dog.registrationPapers}
-                    disabled={isDisabled}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label>
-                  Weight
-                  <input
-                    type="text"
-                    placeholder="Weight"
-                    name="weight"
-                    ref={register}
-                    defaultValue={dog.registrationPapers}
-                    disabled={isDisabled}
-                  />
-                </label>
-              </Form.Field>
-              <Form.Field>
-                <label>
-                  Time
-                  <input
-                    type="text"
-                    placeholder="Time"
-                    name="time"
-                    ref={register}
-                    defaultValue={dog.registrationPapers}
-                    disabled={isDisabled}
-                  />
-                </label>
-              </Form.Field>
-            </Form.Group>
+            <Segment>
+              <p>
+                <strong>Add Times</strong>
+              </p>
+              <Form.Group>
+                <Form.Field>
+                  <label>
+                    Date
+                    <input
+                      type="date"
+                      placeholder="Date"
+                      name="date"
+                      ref={register}
+                      disabled={isDisabled}
+                    />
+                  </label>
+                </Form.Field>
+                <Form.Field>
+                  <label>
+                    Weight
+                    <input
+                      type="text"
+                      placeholder="Weight"
+                      name="weight"
+                      ref={register}
+                      disabled={isDisabled}
+                    />
+                  </label>
+                </Form.Field>
+                <Form.Field>
+                  <label>
+                    Time
+                    <input
+                      type="text"
+                      placeholder="Time"
+                      name="time"
+                      ref={register}
+                      disabled={isDisabled}
+                    />
+                  </label>
+                </Form.Field>
+              </Form.Group>
+            </Segment>
+
             {/* <label>
               Secondary Owner IDs
               <ol>

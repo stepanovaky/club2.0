@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Button, Header, Segment } from "semantic-ui-react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { format } from "date-fns";
+import APIService from "../../../helpers/apiCalls";
+import { apiContext } from "../../../App";
+
 // import { apiUrl } from "../../helpers/backend";
 
 function UnsanctionedEventRegistration(props) {
+  const [api, setApi] = useContext(apiContext);
+  const [counter, setCounter] = useContext(apiContext);
   //   console.log(props.location.state);
   console.log(props);
   const [owners, setOwner] = useState([props.owners]);
@@ -29,7 +34,15 @@ function UnsanctionedEventRegistration(props) {
     setIsDisabled(!isDisabled);
   };
 
-  if (props.success) {
+  if (props.success && api === 0 && counter === 0) {
+    const sendInfo = async () => {
+      APIService.unsanctionedRegistration({
+        owners: owners,
+        dogs: dogs,
+        eventId: props.eventId,
+      });
+    };
+    sendInfo();
     // const sendInfo = async () => {
     //   const postDog = await fetch(`${apiUrl}/api/event/add/unsanctioned`, {
     //     method: "POST",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Header,
@@ -8,15 +8,30 @@ import {
   Label,
   Table,
 } from "semantic-ui-react";
-import DataService from "../../../helpers/data-service";
+import APIService from "../../../helpers/apiCalls";
+import { apiContext } from "../../../App";
+
 // import { apiUrl } from "../../helpers/backend";
 
 function SanctionedEventRegistration(props) {
+  const [api, setApi] = useContext(apiContext);
+  const [counter, setCounter] = useContext(apiContext);
   console.log(props);
   const addedDogs = props.data;
   console.log(addedDogs);
 
-  if (props.success === true) {
+  if (props.success === true && api === 0 && counter === 0) {
+    console.log("this far");
+    const sendData = async () => {
+      APIService.sanctionedRegistration({
+        addedDogs: props.data,
+        eventId: props.eventId,
+      });
+      setApi(api + 1);
+      setCounter(counter + 1);
+    };
+
+    sendData();
     // console.log("almost");
     // const sendData = async () => {
     //   console.log("this far");

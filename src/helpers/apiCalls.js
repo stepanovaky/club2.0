@@ -14,7 +14,8 @@ const APIService = {
   },
   async registerDogAndOwner(data) {
     console.log(window.localStorage.getItem("throttle"));
-    console.log(JSON.stringify({ data: data.data }));
+    console.log(data, "pdfURL");
+    console.log(JSON.stringify(data.data));
 
     if (window.localStorage.getItem("throttle") === "true") {
       fetch(apiUrl + "/api/first/registration", {
@@ -72,6 +73,26 @@ const APIService = {
       },
       body: JSON.stringify(data),
     });
+  },
+  async sanctionedRegistration(object) {
+    console.log(window.localStorage.getItem("throttle"));
+
+    console.log(object);
+    if (window.localStorage.getItem("throttle") === "true") {
+      await fetch(`${apiUrl}/api/sanctioned/event/registration`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(object),
+      });
+    }
+    window.localStorage.setItem("throttle", "false");
+    console.log(window.localStorage.getItem("throttle"));
+
+    setTimeout(function () {
+      window.localStorage.setItem("throttle", "true");
+    }, 60000);
   },
   async getLogs() {
     const getLogs = await fetch(`${apiUrl}/api/get/all/logs`);

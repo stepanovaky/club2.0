@@ -33,7 +33,7 @@ function SanctionedRegistration(props) {
   };
 
   const findDogByCallName = () => {
-    const callName = document.getElementById("call").value;
+    const callName = document.getElementById("call").value.toLowerCase();
 
     for (const dog of addedDogs) {
       if (callName === dog.callName) {

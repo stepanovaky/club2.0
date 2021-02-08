@@ -32,7 +32,7 @@ function RenderOwner(props) {
   return (
     <div className="render-owner">
       <Segment>
-        <p>Toggle to edit fields or delete dog</p>{" "}
+        <p>Toggle to edit fields</p>{" "}
         <Checkbox toggle onChange={handleDisabled} />
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group widths="equal">
@@ -68,7 +68,7 @@ function RenderOwner(props) {
               <label>
                 Mobile
                 <input
-                  defaultValue={owner.Mobile}
+                  defaultValue={owner.mobile}
                   type="text"
                   placeholder="Mobile Number"
                   name="mobile"

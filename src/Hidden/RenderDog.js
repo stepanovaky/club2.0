@@ -21,6 +21,7 @@ function RenderDog(props) {
     } else {
       console.log(data);
       APIService.updateDog(data);
+      setMessage("Action performed successfully");
     }
   };
   // const onSubmit = (data) => {
@@ -90,7 +91,10 @@ function RenderDog(props) {
   //   }
   // };
 
-  const onDelete = () => {};
+  const onDelete = () => {
+    APIService.deleteDog(dog);
+    setMessage("Action performed successfully");
+  };
 
   const handleDisabled = () => {
     setIsDisabled(!isDisabled);

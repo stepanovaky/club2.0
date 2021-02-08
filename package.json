@@ -52,6 +52,8 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-plugin-react": "^7.22.0",
     "sass": "^1.32.5"
   }
 }

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button, Container } from "semantic-ui-react";
+import APIService from "../helpers/apiCalls";
 
 function RegisterEvent() {
   const { register, handleSubmit, errors } = useForm();
+  const [message, setMessage] = useState();
+
+  const onSubmit = (data) => {
+    APIService.addEvent(data);
+    setMessage("Action performed successfully");
+  };
+
   // const onSubmit = (data) => {
   //   const postEvent = fetch(`${apiUrl}/api/create/event`, {
   //     method: "POST",
@@ -16,8 +24,7 @@ function RegisterEvent() {
 
   return (
     <div className="register-event">
-      {/* onSubmit={handleSubmit(onSubmit)} */}
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Container>
           <Form.Group widths="equal">
             <Form.Field>
@@ -47,6 +54,7 @@ function RegisterEvent() {
           </Form.Group>
 
           <Button type="submit">Submit</Button>
+          <p>{message}</p>
         </Container>
       </Form>
     </div>

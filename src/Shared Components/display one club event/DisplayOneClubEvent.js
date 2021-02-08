@@ -78,7 +78,7 @@ function ClubEvents(props) {
     );
   };
 
-  const listEvents = events.map((one, index) => {
+  const listEvents = passed.map((one, index) => {
     return displayEvent(one, index);
   });
 

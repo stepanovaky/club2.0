@@ -3,8 +3,8 @@ import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
 import UnsanctionedRegistration from "../Pages/event page/parts/UnsanctionedRegistration";
 
-// const apiUrl = "http://localhost:8000";
-const apiUrl = "https://club20.herokuapp.com";
+const apiUrl = "http://localhost:8000";
+// const apiUrl = "https://club20.herokuapp.com";
 window.localStorage.setItem("throttle", "true");
 const APIService = {
   async getPdfUrl(file) {
@@ -60,6 +60,15 @@ const APIService = {
       body: JSON.stringify({ data }),
     });
   },
+  async deleteDog(data) {
+    fetch(`${apiUrl}/api/delete/dog`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+  },
   async findOwner(data) {
     const getRequest = await fetch(`${apiUrl}/api/find/owner`, {
       method: "GET",
@@ -70,6 +79,37 @@ const APIService = {
     });
     return getRequest;
   },
+
+  async updateOwner(data) {
+    await fetch(`${apiUrl}/api/update/owner`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  },
+
+  async deleteOwner(data) {
+    await fetch(`${apiUrl}/api/delete/owner`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  },
+
+  async addEvent(data) {
+    await fetch(`${apiUrl}/api/add/event`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  },
+
   async getEvents() {
     const getRequest = await fetch(`${apiUrl}/api/get/events`);
     const response = await getRequest.json();

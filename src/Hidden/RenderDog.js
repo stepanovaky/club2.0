@@ -122,7 +122,7 @@ function RenderDog(props) {
   // };
 
   return (
-    <div key={dog.callName} className="render-dog">
+    <div key={dog?.callName} className="render-dog">
       <Segment>
         <p>
           <strong>{dog.registeredName}</strong>
@@ -135,7 +135,7 @@ function RenderDog(props) {
               <label>
                 Registered name
                 <input
-                  defaultValue={dog.registeredName}
+                  defaultValue={dog?.registeredName}
                   type="text"
                   placeholder="Registered Name"
                   name="registeredName"
@@ -148,7 +148,7 @@ function RenderDog(props) {
               <label>
                 Call Name
                 <input
-                  defaultValue={dog.callName}
+                  defaultValue={dog?.callName}
                   type="text"
                   placeholder="Call Name"
                   name="callName"
@@ -163,7 +163,7 @@ function RenderDog(props) {
               <label>
                 Registration Number
                 <input
-                  defaultValue={dog.registrationNumber}
+                  defaultValue={dog?.registrationNumber}
                   type="text"
                   placeholder="AKC Number"
                   name="akcNumber"
@@ -180,7 +180,7 @@ function RenderDog(props) {
                   placeholder="Sanction ID"
                   name="sanctionId"
                   ref={register}
-                  defaultValue={dog.sanctionId}
+                  defaultValue={dog?.sanctionId}
                   disabled={isDisabled}
                 />
               </label>
@@ -195,7 +195,7 @@ function RenderDog(props) {
                   placeholder="Registration Status"
                   name="registered"
                   ref={register}
-                  defaultValue={dog.registrationStatus}
+                  defaultValue={dog?.registrationStatus}
                   disabled={isDisabled}
                 />
               </label>
@@ -210,7 +210,7 @@ function RenderDog(props) {
                   placeholder="Registration Papers"
                   name="registrationPapersType"
                   ref={register}
-                  defaultValue={dog.registrationPapers}
+                  defaultValue={dog?.registrationPapers}
                   disabled={isDisabled}
                 />
               </label>
@@ -224,7 +224,7 @@ function RenderDog(props) {
               </Form.Field>
             ) : (
               <Button>
-                <a href={dog.registrationPapersUrl} target="_blank" download>
+                <a href={dog?.registrationPapersUrl} target="_blank" download>
                   Download Registration Papers
                 </a>
               </Button>

@@ -9,7 +9,7 @@ import { apiContext } from "../../../App";
 // import { storageRef } from "../../../firebase";
 // import { apiUrl } from "../../helpers/backend";
 
-async function ClubRegistrationConfirmation(props) {
+function ClubRegistrationConfirmation(props) {
   const [api, setApi] = useContext(apiContext);
   const [counter, setCounter] = useContext(apiContext);
   //   console.log(props);
@@ -54,26 +54,19 @@ async function ClubRegistrationConfirmation(props) {
     console.log("call");
 
     const sendDogData = async () => {
-  
       for (const dog of dogs) {
         if (!dog.file) {
-          console.log('thing')
         } else {
-          console.log('url')
-      
-          dog.pdfUrl = await APIService.getPdfUrl(dog.file)
-      
-          console.log('here')
+          dog.pdfUrl = await APIService.getPdfUrl(dog.file);
         }
       }
-  
-      console.log("this far")
+
       await APIService.registerDogAndOwner({
-        data:{ owner, dogs, secondary },
-      })
-      
-      setApi(api + 1)
-      setCounter(counter + 1)
+        data: { owner, dogs, secondary },
+      });
+
+      setApi(api + 1);
+      setCounter(counter + 1);
 
       // console.log("this is newDogs", newDogs);
 
@@ -81,7 +74,7 @@ async function ClubRegistrationConfirmation(props) {
       // console.log(dogsFixed);
       // console.log("this is dog pdf url", newDogs[0].pdfUrl);
     };
-    await sendDogData();
+    sendDogData();
   } else {
     console.log("call stopped");
   }

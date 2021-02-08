@@ -12,7 +12,6 @@ import UnsanctionedRegistration from "./UnsanctionedRegistration";
 
 function RegisterForEvent(props) {
   const [ifRegistered, setIfRegistered] = useState();
-  console.log(props);
 
   //Enter dogs with sanction ID
   //Enter dogs without sanction ID

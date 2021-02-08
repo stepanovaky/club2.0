@@ -27,7 +27,6 @@ function FindEvent() {
   }, []);
 
   const sortedOptions = (arr) => {
-    console.log(arr);
     let temp;
     if (arr !== undefined) {
       for (let i = arr.length - 1; i > 0; i--) {
@@ -47,7 +46,6 @@ function FindEvent() {
   };
 
   sortedOptions(events);
-  console.log(events);
 
   const eventsOptions =
     events !== undefined
@@ -71,38 +69,11 @@ function FindEvent() {
     const url = await APIService.getPdfUrl(data.eventPdf);
     data.eventPdfUrl = url;
     const res = APIService.updateEvents(data);
-    console.log(res.status);
     setMessage("Event successfully updated");
   };
 
   const { register, handleSubmit, errors } = useForm();
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   if (data.eventPdf === undefined || data.eventPdf.length === 0) {
-  //     console.log("hello");
-  //   } else {
-  //     //code to upload eventjpg
-  //     const uploadTask = await storageRef
-  //       .child(`${data.eventPdf[0].name}`)
-  //       .put(data.eventPdf[0]);
-
-  //     uploadTask.ref.getDownloadURL().then((res) => {
-  //       data = { ...data, pdfUrl: res };
-  //       updateEvent(data);
-  //     });
-  //   }
-  // };
-
-  // const updateEvent = async (data) => {
-  //   console.log(data);
-  //   const sendEvent = await fetch(`${apiUrl}/api/update/event`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(data),
-  //   });
-  // };
+ 
 
   return (
     <div className="find-event">

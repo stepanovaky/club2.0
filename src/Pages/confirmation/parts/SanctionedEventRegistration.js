@@ -16,12 +16,9 @@ import { apiContext } from "../../../App";
 function SanctionedEventRegistration(props) {
   const [api, setApi] = useContext(apiContext);
   const [counter, setCounter] = useContext(apiContext);
-  console.log(props);
   const addedDogs = props.data;
-  console.log(addedDogs);
 
   if (props.success === true && api === 0 && counter === 0) {
-    console.log("this far");
     const sendData = async () => {
       APIService.sanctionedRegistration({
         addedDogs: props.data,
@@ -32,18 +29,7 @@ function SanctionedEventRegistration(props) {
     };
 
     sendData();
-    // console.log("almost");
-    // const sendData = async () => {
-    //   console.log("this far");
-    //   const postDog = await fetch(`${apiUrl}/api/event/add/sanctioned`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ addedDogs: addedDogs, eventId: props.eventId }),
-    //   });
-    // };
-    // sendData();
+  
   }
   return (
     <div className="sanctioned-event-registration">

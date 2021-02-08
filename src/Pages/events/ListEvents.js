@@ -5,7 +5,6 @@ import APIService from "../../helpers/apiCalls";
 
 function Events() {
   const [events, setEvents] = useState([]);
-  console.log(events);
 
   useEffect(() => {
     const getEvents = async () => {

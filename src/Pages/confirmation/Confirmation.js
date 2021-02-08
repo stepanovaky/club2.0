@@ -16,7 +16,6 @@ function ConfirmationPage(props) {
   // const [counter, setCounter] = useState(0);
   //if parent re-renders, child re-renders
 
-  console.log(props);
 
   let numDogs;
 
@@ -24,7 +23,6 @@ function ConfirmationPage(props) {
     numDogs = props.location.state.clubRegistration.dogs.length;
   } else if (props.location.state.sanctionedEventRegistration) {
     numDogs = props.location.state.sanctionedEventRegistration.length;
-    console.log(numDogs);
   } else if (props.location.state.nonsanctionedEventRegistration) {
     numDogs = props.location.state.nonsanctionedEventRegistration.dogs.length;
   }

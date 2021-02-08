@@ -14,7 +14,6 @@ import { useHistory } from "react-router-dom";
 import APIService from "../../../helpers/apiCalls";
 
 function SanctionedRegistration(props) {
-  console.log(props);
   const { register, handleSubmit } = useForm();
   const [message, setMessage] = useState();
   const [sanction, setSanction] = useState();
@@ -26,7 +25,6 @@ function SanctionedRegistration(props) {
   const history = useHistory();
 
   const onSubmit = async () => {
-    console.log(addedDogs);
     history.push("/confirm", {
       eventId: props.eventId,
       sanctionedEventRegistration: addedDogs,
@@ -36,16 +34,13 @@ function SanctionedRegistration(props) {
 
   const findDogByCallName = () => {
     const callName = document.getElementById("call").value;
-    console.log(callName);
 
     for (const dog of addedDogs) {
       if (callName === dog.callName) {
-        // console.log("true");
         setRepeatMessage("Dog already added");
         setDisableAddDog(true);
       } else if (callName !== dog.callName) {
         setDisableAddDog(false);
-        // console.log("false");
         setRepeatMessage("");
       }
     }
@@ -53,7 +48,6 @@ function SanctionedRegistration(props) {
   };
 
   const fetchDogByCallName = async (name) => {
-    console.log(name);
     const res = await APIService.findDog({
       findDogs: "callName * preferred",
       dogItem: name,
@@ -61,24 +55,19 @@ function SanctionedRegistration(props) {
     const response = await res.json();
     setSanction(response.dog?.dog?.sanctionId);
 
-    //findDogs: callName * preferred
-    //dogItem: name
   };
 
-  //
+  
 
   const findDogBySanctionId = () => {
     const sanctionId = document.getElementById("sanction").value;
-    console.log(sanctionId.value);
 
     for (const dog of addedDogs) {
       if (sanctionId === dog.sanctionId) {
-        // console.log("true");
         setRepeatMessage("Dog already added");
         setDisableAddDog(true);
       } else if (sanctionId !== dog.sanctionId) {
         setDisableAddDog(false);
-        // console.log("false");
         setRepeatMessage("");
       }
     }
@@ -91,12 +80,10 @@ function SanctionedRegistration(props) {
       dogItem: sanctionId,
     });
     const response = await res.json();
-    console.log(response);
     setCallName(response.dog?.dog?.callName);
   };
 
   const addSanctionedDog = (data) => {
-    console.log(data);
     setCallName("");
     setSanction("");
     setSanction("");
@@ -104,7 +91,6 @@ function SanctionedRegistration(props) {
     document.getElementById("form").reset();
 
     setAddedDogs((addedDogs) => [...addedDogs, data]);
-    console.log(addedDogs);
   };
 
   const resetAddedDogs = () => {

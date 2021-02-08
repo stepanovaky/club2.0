@@ -13,7 +13,6 @@ import {
 import { useHistory } from "react-router-dom";
 
 function UnsanctionedRegistration(props) {
-  console.log(props);
   const history = useHistory();
   const { control, register, handleSubmit } = useForm();
 

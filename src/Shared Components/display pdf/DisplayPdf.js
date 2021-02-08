@@ -1,9 +1,7 @@
 import React from "react";
 
 function DisplayPdf(props) {
-  console.log(props);
   const pdf = props.pdfUrl;
-  console.log(pdf);
   return (
     <div className="display-image">
       <iframe

@@ -31,7 +31,6 @@ function MyCalendar(props) {
         })
       : null;
 
-  console.log(mapEvents);
 
   const myEventsList = events[0] !== undefined ? mapEvents : null;
 

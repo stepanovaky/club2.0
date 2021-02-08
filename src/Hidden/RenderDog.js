@@ -6,20 +6,16 @@ import APIService from "../helpers/apiCalls";
 function RenderDog(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [message, setMessage] = useState();
-  console.log(props);
   const dog = props?.dog;
   const owner = props?.owner;
 
-  console.log(props);
 
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     if (isDisabled === true) {
       setMessage("Please toggle to edit");
     } else {
-      console.log(data);
       APIService.updateDog(data);
       setMessage("Action performed successfully");
     }
@@ -29,7 +25,6 @@ function RenderDog(props) {
   //     setMessage("Please toggle to edit");
   //   } else {
   //     if (data.file === undefined || data.file.length === 0) {
-  //       console.log(data);
   //       setMessage();
   //       const toSend = async () => {
   //         const sendUpdate = fetch(`${apiUrl}/api/update/dog`, {
@@ -43,7 +38,6 @@ function RenderDog(props) {
   //         const response = await sendUpdate;
   //         if (response.status === 200) {
   //           const fetchResponse = await response.json();
-  //           console.log(fetchResponse.message);
   //           setMessage(fetchResponse.message);
   //         }
   //       };
@@ -51,7 +45,6 @@ function RenderDog(props) {
   //       toSend();
   //     } else {
   //       const url = async () => {
-  //         //   console.log("here");
   //         const uploadTask = await storageRef
   //           .child(`dog/${data.akcNumber}/${data.file[0].name}`)
   //           .put(data.file[0]);
@@ -73,11 +66,9 @@ function RenderDog(props) {
   //                 body: JSON.stringify(data),
   //               });
   //               const response = await sendUpdate;
-  //               console.log(response);
 
   //               if (response.status === 200) {
   //                 const fetchResponse = await response.json();
-  //                 console.log(fetchResponse.message);
   //                 setMessage(fetchResponse.message);
   //               }
   //             };

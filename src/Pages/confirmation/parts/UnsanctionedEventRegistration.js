@@ -10,8 +10,6 @@ import { apiContext } from "../../../App";
 function UnsanctionedEventRegistration(props) {
   const [api, setApi] = useContext(apiContext);
   const [counter, setCounter] = useContext(apiContext);
-  //   console.log(props.location.state);
-  console.log(props);
   const [owners, setOwner] = useState([props.owners]);
   const [dogs, setDogs] = useState(props.dogs);
   const [isDisabled, setIsDisabled] = useState(true);

@@ -4,16 +4,12 @@ import { Link } from "react-router-dom";
 import { format, addDays } from "date-fns";
 
 function ClubEvents(props) {
-  //when server is built, there should be an API call
-  //to the server to create the events list here
+
   const { events } = props;
 
-  // console.log(events[0]);
-  // console.log(new Date(events[0][0].startDate).getTime());
 
   const bubbleSort = (arr) => {
     let temp;
-    // console.log(new Date(arr[0].startDate).getTime());
     for (let i = arr.length - 1; i > 0; i--) {
       for (let j = 0; j < i; j++) {
         if (
@@ -39,7 +35,6 @@ function ClubEvents(props) {
     arr.filter((item) => {
       if (new Date(item.startDate).getTime() < addDays(today.getTime(), -1)) {
       } else {
-        console.log("there");
         passed.push(item);
       }
     });
@@ -47,7 +42,6 @@ function ClubEvents(props) {
 
   passedDate(events);
 
-  console.log(passed);
 
   const displayEvent = (one, index) => {
     return (

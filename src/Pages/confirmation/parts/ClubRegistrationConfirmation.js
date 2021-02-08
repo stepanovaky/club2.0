@@ -12,18 +12,14 @@ import { apiContext } from "../../../App";
 function ClubRegistrationConfirmation(props) {
   const [api, setApi] = useContext(apiContext);
   const [counter, setCounter] = useContext(apiContext);
-  //   console.log(props);
   const success = props.success;
   const owner = props.data.owner;
   const dogs = props.data.dogs;
   const secondary = props.data.dogOwner;
   const handleNumDogs = props.handleNumDogs;
-  //   console.log(owners, dogs, secondary);
 
   const counter1 = props.counter;
-  console.log(props);
 
-  console.log(api);
 
   const {
     control,
@@ -37,7 +33,6 @@ function ClubRegistrationConfirmation(props) {
 
   const [isDisabled, setIsDisabled] = useState(true);
   const [theData, setTheData] = useState({ data: props.data });
-  //   console.log(theData);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -51,7 +46,6 @@ function ClubRegistrationConfirmation(props) {
   //fires off when component re-renders
 
   if (success && api === 0 && counter === 0) {
-    console.log("call");
 
     const sendDogData = async () => {
       for (const dog of dogs) {
@@ -68,20 +62,13 @@ function ClubRegistrationConfirmation(props) {
       setApi(api + 1);
       setCounter(counter + 1);
 
-      // console.log("this is newDogs", newDogs);
-
-      // const dogsFixed = await dogs;
-      // console.log(dogsFixed);
-      // console.log("this is dog pdf url", newDogs[0].pdfUrl);
     };
     sendDogData();
   } else {
-    console.log("call stopped");
   }
 
   const onSubmit = async (form) => {
     if (isDisabled === false) {
-      console.log(form.owners, form.dogs, form.dogOwner);
       //   handleNumDogs(data.dogs.length);
       setTheData({
         data: {
@@ -91,7 +78,6 @@ function ClubRegistrationConfirmation(props) {
         },
       });
     } else {
-      //   console.log({ data: { owners, dogs, secondary } });
       setTheData({ data: { owner, dogs, secondary } });
     }
   };

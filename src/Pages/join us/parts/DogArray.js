@@ -24,7 +24,6 @@ export default function Fields({
 
   const handleDogName = () => {
     const name = document.getElementById("dogName").value;
-    console.log(name);
     setDogName(name);
   };
 
@@ -34,18 +33,15 @@ export default function Fields({
 
   const findDogByCallName = () => {
     const callName = document.getElementById("call").value;
-    console.log(callName);
     fetchDogByCallName(callName.toLowerCase());
   };
 
   const fetchDogByCallName = async (name) => {
-    console.log(name);
     const res = await APIService.findDog({
       findDogs: "callName * preferred",
       dogItem: name,
     });
     const response = await res.json();
-    console.log(response);
     if (response.dog?.dog) {
       setMessage("Call Name Taken");
       handleSend(false);
@@ -53,8 +49,7 @@ export default function Fields({
       setMessage("");
       handleSend(true);
     }
-    //findDogs: callName * preferred
-    //dogItem: name
+ 
   };
 
   return (

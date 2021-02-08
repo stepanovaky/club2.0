@@ -13,7 +13,6 @@ function FindOwner() {
   const onSubmit = async (data) => {
     const res = await APIService.findOwner(data);
     const response = await res.json();
-    console.log(response);
     setOwner([response.owner]);
   };
 

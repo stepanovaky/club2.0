@@ -13,17 +13,14 @@ function FindDog() {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     const res = await APIService.findDog(data);
     const response = await res.json();
-    console.log(response);
-    console.log(response.dog);
+  
     setDog([response.dog.dog]);
     setOwner(response.dog.owner);
     // const response = JSON.parse(res);
   };
 
-  console.log(owner);
 
   const displayDog =
     dog.length >= 1 && dog !== undefined

@@ -23,7 +23,6 @@ function EventPage(props) {
   const event =
     events !== undefined ? events.find((one) => id === one.eventId) : undefined;
 
-  console.log(event);
 
   useEffect(() => {
     const getEvents = async () => {

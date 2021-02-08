@@ -7,17 +7,14 @@ function RenderOwner(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [message, setMessage] = useState();
 
-  console.log(props);
   const { register, handleSubmit, errors } = useForm();
 
   const owner = props?.owner;
 
   const onSubmit = (data) => {
-    console.log(data);
     if (isDisabled === true) {
       setMessage("Please toggle to edit");
     } else {
-      console.log(data);
       APIService.updateOwner(data);
       setMessage("Action performed successfully");
     }

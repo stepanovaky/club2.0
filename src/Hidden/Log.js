@@ -25,7 +25,6 @@ function Log() {
   const [postsPerPage, setPostsPerPage] = useState(20);
   const [pageNumbers, setPageNumbers] = useState([]);
 
-  // console.log(logs);
 
   const bubbleSort = (arr) => {
     let temp;
@@ -46,12 +45,10 @@ function Log() {
   };
 
   const sortedLogs = bubbleSort(logs);
-  console.log(sortedLogs);
 
   const thing = (log) => {
     for (let i = 0; i < log.length; i++) {
       if (log[i] === log[i - 1]) {
-        console.log("same");
       }
     }
   };
@@ -68,9 +65,7 @@ function Log() {
   useEffect(() => {
     const fetchLogs = async () => {
       const res = await APIService.getLogs();
-      console.log(res);
       const response = await res.json();
-      console.log(response.log);
 
       setLog(response.log);
     };
@@ -81,8 +76,7 @@ function Log() {
   //   const fetchExcel = fetch(`${apiUrl}/api/log/write/excel`);
 
   //   const response = await fetchExcel;
-  //   console.log(response.url);
-  //   window.open(response.url, "_self");
+  //  
   // };
 
   const useRowStyles = makeStyles({
@@ -225,7 +219,6 @@ function Log() {
     );
   });
 
-  // console.log(rows);
 
   return (
     <div className="log">
@@ -255,9 +248,7 @@ function Log() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* {rows.map((row, index) => {
-                console.log(row);
-              })} */}
+              
               {rows.map((row, index) => (
                 <Row key={index} row={row} />
               ))}
@@ -309,8 +300,7 @@ function Log() {
             {sortedLogs.map((item) => {
               return (
                 <>
-                  {console.log(item.dogs.length)}
-                  {console.log(item.dogs.secondaryOwners?.length)}
+                 
                   <Table.Row>
                     <Table.Cell
                       rowSpan={
@@ -383,7 +373,6 @@ function Log() {
                       {item.zipcode}
                     </Table.Cell>
                     {item.dogs.map((dog) => {
-                      console.log(dog);
                       return (
                         <>
                           <Table.Cell>{dog.callName}</Table.Cell>

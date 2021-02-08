@@ -18,7 +18,7 @@ function SanctionedEventRegistration(props) {
   const [counter, setCounter] = useContext(apiContext);
   const addedDogs = props.data;
 
-  if (props.success === true && api === 0 && counter === 0) {
+  if (props.success === true) {
     const sendData = async () => {
       APIService.sanctionedRegistration({
         addedDogs: props.data,

@@ -45,7 +45,7 @@ function ClubRegistrationConfirmation(props) {
   //execute only when payment process is done
   //fires off when component re-renders
 
-  if (success && api === 0 && counter === 0) {
+  if (success ) {
 
     const sendDogData = async () => {
       for (const dog of dogs) {

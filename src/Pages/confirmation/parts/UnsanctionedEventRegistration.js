@@ -32,7 +32,7 @@ function UnsanctionedEventRegistration(props) {
     setIsDisabled(!isDisabled);
   };
 
-  if (props.success && api === 0 && counter === 0) {
+  if (props.success ) {
     const sendInfo = async () => {
       APIService.unsanctionedRegistration({
         owners: owners,

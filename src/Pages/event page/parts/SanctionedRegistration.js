@@ -120,7 +120,7 @@ function SanctionedRegistration(props) {
             </Form.Field>
             <Form.Field>
               <label>
-                Sanction ID
+                Sanction ID (only lower case)
                 <input
                   id="sanction"
                   onChange={findDogBySanctionId}

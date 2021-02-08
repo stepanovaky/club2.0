@@ -20,67 +20,6 @@ function RenderDog(props) {
       setMessage("Action performed successfully");
     }
   };
-  // const onSubmit = (data) => {
-  //   if (data.akcNumber === undefined) {
-  //     setMessage("Please toggle to edit");
-  //   } else {
-  //     if (data.file === undefined || data.file.length === 0) {
-  //       setMessage();
-  //       const toSend = async () => {
-  //         const sendUpdate = fetch(`${apiUrl}/api/update/dog`, {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify(data),
-  //         });
-
-  //         const response = await sendUpdate;
-  //         if (response.status === 200) {
-  //           const fetchResponse = await response.json();
-  //           setMessage(fetchResponse.message);
-  //         }
-  //       };
-
-  //       toSend();
-  //     } else {
-  //       const url = async () => {
-  //         const uploadTask = await storageRef
-  //           .child(`dog/${data.akcNumber}/${data.file[0].name}`)
-  //           .put(data.file[0]);
-
-  //         uploadTask.ref
-  //           .getDownloadURL()
-  //           .then((res) => {
-  //             data = { ...data, registrationPapersUrl: res };
-  //             return data;
-  //           })
-  //           .then((res) => {
-  //             //copied from above, ideally seperate into seperate function
-  //             const toSend = async () => {
-  //               const sendUpdate = fetch(`${apiUrl}/api/update/dog`, {
-  //                 method: "POST",
-  //                 headers: {
-  //                   "Content-Type": "application/json",
-  //                 },
-  //                 body: JSON.stringify(data),
-  //               });
-  //               const response = await sendUpdate;
-
-  //               if (response.status === 200) {
-  //                 const fetchResponse = await response.json();
-  //                 setMessage(fetchResponse.message);
-  //               }
-  //             };
-
-  //             toSend();
-  //           });
-  //       };
-
-  //       url();
-  //     }
-  //   }
-  // };
 
   const onDelete = () => {
     APIService.deleteDog(dog);
@@ -91,32 +30,11 @@ function RenderDog(props) {
     setIsDisabled(!isDisabled);
   };
 
-  // const onDelete = async (data) => {
-  //   if (data.akcNumber === undefined) {
-  //     setMessage("Please toggle to delete");
-  //   } else {
-  //     const deleteDog = fetch(`${apiUrl}/api/delete/dog`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ akcNumber: data.akcNumber }),
-  //     });
-  //     const response = await deleteDog;
-
-  //     if (response.status === 200) {
-  //       setMessage("Dog successfully deleted!");
-  //     } else {
-  //       setMessage("Dog not deleted.");
-  //     }
-  //   }
-  // };
-
   return (
     <div key={dog?.callName} className="render-dog">
       <Segment>
         <p>
-          <strong>{dog.registeredName}</strong>
+          <strong>{dog?.registeredName}</strong>
         </p>
         <p>Toggle to edit fields or delete dog</p>{" "}
         <Checkbox toggle onChange={handleDisabled} />
@@ -328,27 +246,7 @@ function RenderDog(props) {
               </Form.Group>
             </Segment>
 
-            {/* <label>
-              Secondary Owner IDs
-              <ol>
-                {dog.secondaryIds === null || dog.secondaryIds.length === 0
-                  ? "No secondary owners"
-                  : dog.secondaryIds.map((id, index) => {
-                      return (
-                        <Form.Field key={index}>
-                          <input
-                            type="text"
-                            placeholder="Secondary ID"
-                            name={`secondaryIds[${index}]`}
-                            ref={register}
-                            defaultValue={id}
-                            disabled={isDisabled}
-                          />
-                        </Form.Field>
-                      );
-                    })}
-              </ol>
-            </label> */}
+          
           </Form.Group>
           <Button.Group>
             <Button negative onClick={handleSubmit(onDelete)}>

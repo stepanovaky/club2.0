@@ -53,7 +53,7 @@ function Log() {
     }
   };
 
-  thing(sortedLogs);
+  thing(sortedLogs.reverse());
 
   //figure out code to remove duplicates
 

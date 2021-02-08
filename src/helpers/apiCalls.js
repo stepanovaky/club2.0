@@ -20,7 +20,7 @@ const APIService = {
     console.log(JSON.stringify(data.data));
 
     if (window.localStorage.getItem("throttle") === "true") {
-      fetch(apiUrl + "/api/first/registration", {
+      await fetch(apiUrl + "/api/first/registration", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

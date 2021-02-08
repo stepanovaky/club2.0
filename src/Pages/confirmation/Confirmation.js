@@ -77,44 +77,9 @@ function ConfirmationPage(props) {
         />
       ) : null}
 
-      {/* <Segment> */}
-      {/* <Container> */}
-      {/* <p>Total: ${userPays}.00</p> */}
-      {/* <div style={{ width: "200px" }}> */}
-      {/* <PayPalButton
-              style={{
-                color: "white",
-                layout: "horizontal",
-                shape: "pill",
-                size: "25",
-              }}
-              // amount={userPays}
-              amount="0.01"
-              options={{
-                shippingPreference: "NO_SHIPPING",
-              }}
-              // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-              onSuccess={(details, data) => {
-                handleSuccess(data);
-                setMessage(
-                  "Success! " +
-                    "Transaction completed by " +
-                    details.payer.name.given_name
-                );
-
-                // OPTIONAL: Call your server to save the transaction
-                //   return fetch("/paypal-transaction-complete", {
-                //     method: "post",
-                //     body: JSON.stringify({
-                //       orderID: data.orderID,
-                //     }),
-                //   });
-              }}
-            /> */}
+     
       <PaymentContainer handleSuccess={handleSuccess} userPays={userPays} />
-      {/* </div> */}
-      {/* </Container> */}
-      {/* </Segment> */}
+     
       <h5>{message}</h5>
     </div>
   );

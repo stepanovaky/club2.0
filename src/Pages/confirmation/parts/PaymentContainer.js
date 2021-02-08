@@ -25,7 +25,7 @@ function PaymentContainer(props) {
             }}
             onSuccess={(details, data) => {
               props.handleSuccess(details, data);
-              setApi(api + 1);
+              
             }}
           />
         </div>

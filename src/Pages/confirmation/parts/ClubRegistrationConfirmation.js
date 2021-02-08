@@ -4,7 +4,6 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { format } from "date-fns";
 import APIService from "../../../helpers/apiCalls";
 import { throttle, debounce } from "throttle-debounce";
-import { apiContext } from "../../../App";
 
 // import { storageRef } from "../../../firebase";
 // import { apiUrl } from "../../helpers/backend";
@@ -59,8 +58,7 @@ function ClubRegistrationConfirmation(props) {
         data: { owner, dogs, secondary },
       });
 
-      setApi(api + 1);
-      setCounter(counter + 1);
+      
 
     };
     sendDogData();

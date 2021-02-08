@@ -3,6 +3,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { Container, Segment } from "semantic-ui-react";
 
 function PaymentContainer(props) {
+  console.log('got pressed')
   
 
   return (
@@ -23,7 +24,7 @@ function PaymentContainer(props) {
               shippingPreference: "NO_SHIPPING",
             }}
             onSuccess={(details, data) => {
-              console.log('this far')
+              
               props.handleSuccess(details, data);
               
             }}

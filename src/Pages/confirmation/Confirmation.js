@@ -42,14 +42,16 @@ function ConfirmationPage(props) {
     }
   }, []);
 
-  // let counter = 0;
+ 
 
   const handleSuccess = (details, data) => {
+    console.log('set success')
     setSuccess(true);
+    console.log(details, data)
     setMessage(
       "Success! " + "Transaction completed by " + details.payer.name.given_name
     );
-    // setCounter(counter + 1);
+   
   };
 
   return (

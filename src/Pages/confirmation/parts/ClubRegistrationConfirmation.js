@@ -8,7 +8,6 @@ import APIService from "../../../helpers/apiCalls";
 // import { apiUrl } from "../../helpers/backend";
 
 function ClubRegistrationConfirmation(props) {
-  const [api, setApi] = useContext(apiContext);
   const [counter, setCounter] = useContext(apiContext);
   //   console.log(props);
   const success = props.success;

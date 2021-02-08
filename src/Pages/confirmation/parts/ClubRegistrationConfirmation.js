@@ -19,7 +19,6 @@ function ClubRegistrationConfirmation(props) {
   const counter1 = props.counter;
   console.log(props);
 
-  console.log(api);
 
   const {
     control,

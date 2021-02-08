@@ -134,7 +134,7 @@ function RenderDog(props) {
             ) : (
               <Button>
                 <a href={dog?.registrationPapersUrl} target="_blank" download>
-                  Download Registration Papers
+                  Download/View Registration Papers
                 </a>
               </Button>
             )}

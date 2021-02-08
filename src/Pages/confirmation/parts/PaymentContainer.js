@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
 import { Container, Segment } from "semantic-ui-react";
-import { apiContext } from "../../../App";
 
 function PaymentContainer(props) {
-  const [api, setApi] = useContext(apiContext);
+  
 
   return (
     <Segment>
@@ -24,6 +23,7 @@ function PaymentContainer(props) {
               shippingPreference: "NO_SHIPPING",
             }}
             onSuccess={(details, data) => {
+              console.log('this far')
               props.handleSuccess(details, data);
               
             }}

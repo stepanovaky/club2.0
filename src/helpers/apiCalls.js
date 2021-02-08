@@ -14,6 +14,7 @@ const APIService = {
     return akcPapersUrl;
   },
   async registerDogAndOwner(data) {
+    console.log("here");
     console.log(window.localStorage.getItem("throttle"));
     console.log(data, "pdfURL");
     console.log(JSON.stringify(data.data));

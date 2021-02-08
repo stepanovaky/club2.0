@@ -54,31 +54,34 @@ function ClubRegistrationConfirmation(props) {
     console.log("call");
 
     const sendDogData = async () => {
-      Promise.all(
-        dogs.map((dog, index) => {
-          if (dog.file === undefined || dog.file.length === 0) {
-            console.log("thing");
-          } else {
-            const url = async () => {
-              const getUrl = await APIService.getPdfUrl(dog.file);
-              dogs[index].pdfUrl = await getUrl;
-            };
-            url();
-          }
-        })
-      );
-
-      Promise.all(sendDogData()).then(() => {
-        APIService.registerDogAndOwner({ data: { owner, dogs, secondary } });
-        setApi(api + 1);
-        setCounter(counter + 1);
+      dogs.map((dog, index) => {
+        if (dog.file === undefined || dog.file.length === 0) {
+          console.log("thing");
+        } else {
+          console.log("url");
+          const url = async () => {
+            const getUrl = await APIService.getPdfUrl(dog.file);
+            dogs[index].pdfUrl = await getUrl;
+            console.log("here");
+          };
+          url().then(() => {
+            console.log("this far");
+            APIService.registerDogAndOwner({
+              data: { owner, dogs, secondary },
+            });
+            setApi(api + 1);
+            setCounter(counter + 1);
+          });
+        }
       });
+
       // console.log("this is newDogs", newDogs);
 
       // const dogsFixed = await dogs;
       // console.log(dogsFixed);
       // console.log("this is dog pdf url", newDogs[0].pdfUrl);
     };
+    sendDogData();
   } else {
     console.log("call stopped");
   }

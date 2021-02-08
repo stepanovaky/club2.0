@@ -3,8 +3,8 @@ import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
 import UnsanctionedRegistration from "../Pages/event page/parts/UnsanctionedRegistration";
 
-// const apiUrl = "http://localhost:8000";
-const apiUrl = "https://club20.herokuapp.com";
+const apiUrl = "http://localhost:8000";  
+// const apiUrl = "https://club20.herokuapp.com"; 
 window.localStorage.setItem("throttle", "true");
 const APIService = {
   async getPdfUrl(file) {
@@ -123,6 +123,7 @@ const APIService = {
   async sanctionedRegistration(object) {
     
     if (window.localStorage.getItem("throttle") === "true") {
+      window.localStorage.setItem("throttle", "false");
       await fetch(`${apiUrl}/api/sanctioned/event/registration`, {
         method: "POST",
         headers: {
@@ -131,7 +132,6 @@ const APIService = {
         body: JSON.stringify(object),
       });
     }
-    window.localStorage.setItem("throttle", "false");
 
     setTimeout(function () {
       window.localStorage.setItem("throttle", "true");
@@ -139,6 +139,7 @@ const APIService = {
   },
   async unsanctionedRegistration(object) {
     if (window.localStorage.getItem("throttle") === "true") {
+      window.localStorage.setItem("throttle", "false");
       await fetch(`${apiUrl}/api/unsanctioned/event/registration`, {
         method: "POST",
         headers: {
@@ -147,7 +148,7 @@ const APIService = {
         body: JSON.stringify(object),
       });
     }
-    window.localStorage.setItem("throttle", "false");
+    
 
     setTimeout(function () {
       window.localStorage.setItem("throttle", "true");

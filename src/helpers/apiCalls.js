@@ -20,6 +20,7 @@ const APIService = {
     console.log(JSON.stringify(data.data));
 
     if (window.localStorage.getItem("throttle") === "true") {
+      window.localStorage.setItem("throttle", "false");
       await fetch(apiUrl + "/api/first/registration", {
         method: "POST",
         headers: {
@@ -31,8 +32,8 @@ const APIService = {
       });
     }
 
-    window.localStorage.setItem("throttle", "false");
-    console.log(window.localStorage.getItem("throttle"));
+    
+    
 
     setTimeout(function () {
       window.localStorage.setItem("throttle", "true");

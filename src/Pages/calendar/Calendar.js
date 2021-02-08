@@ -24,7 +24,7 @@ function MyCalendar(props) {
     events !== undefined
       ? events.map((one) => {
           return {
-            title: one.name,
+            title: `${one.eventName}`,
             start: addDays(new Date(one.startDate), 1),
             end: addDays(new Date(one.startDate), 1),
           };

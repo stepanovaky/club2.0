@@ -4,6 +4,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { format } from "date-fns";
 import APIService from "../../../helpers/apiCalls";
 import { throttle, debounce } from "throttle-debounce";
+import { apiContext } from "../../../App";
 
 // import { storageRef } from "../../../firebase";
 // import { apiUrl } from "../../helpers/backend";
@@ -11,14 +12,18 @@ import { throttle, debounce } from "throttle-debounce";
 function ClubRegistrationConfirmation(props) {
   const [api, setApi] = useContext(apiContext);
   const [counter, setCounter] = useContext(apiContext);
+  //   console.log(props);
   const success = props.success;
   const owner = props.data.owner;
   const dogs = props.data.dogs;
   const secondary = props.data.dogOwner;
   const handleNumDogs = props.handleNumDogs;
+  //   console.log(owners, dogs, secondary);
 
   const counter1 = props.counter;
+  console.log(props);
 
+  console.log(api);
 
   const {
     control,
@@ -32,6 +37,7 @@ function ClubRegistrationConfirmation(props) {
 
   const [isDisabled, setIsDisabled] = useState(true);
   const [theData, setTheData] = useState({ data: props.data });
+  //   console.log(theData);
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -44,11 +50,12 @@ function ClubRegistrationConfirmation(props) {
   //execute only when payment process is done
   //fires off when component re-renders
 
-  if (success ) {
+  if (success && api === 0 && counter === 0) {
+    console.log("call");
 
     const sendDogData = async () => {
       for (const dog of dogs) {
-        if ( dog.file === undefined || dog.file.length === 0) {
+        if (dog.file === undefined || dog.file.length === 0) {
         } else {
           dog.pdfUrl = await APIService.getPdfUrl(dog.file);
         }
@@ -58,15 +65,23 @@ function ClubRegistrationConfirmation(props) {
         data: { owner, dogs, secondary },
       });
 
-      
+      setApi(api + 1);
+      setCounter(counter + 1);
 
+      // console.log("this is newDogs", newDogs);
+
+      // const dogsFixed = await dogs;
+      // console.log(dogsFixed);
+      // console.log("this is dog pdf url", newDogs[0].pdfUrl);
     };
     sendDogData();
   } else {
+    console.log("call stopped");
   }
 
   const onSubmit = async (form) => {
     if (isDisabled === false) {
+      console.log(form.owners, form.dogs, form.dogOwner);
       //   handleNumDogs(data.dogs.length);
       setTheData({
         data: {
@@ -76,6 +91,7 @@ function ClubRegistrationConfirmation(props) {
         },
       });
     } else {
+      //   console.log({ data: { owners, dogs, secondary } });
       setTheData({ data: { owner, dogs, secondary } });
     }
   };

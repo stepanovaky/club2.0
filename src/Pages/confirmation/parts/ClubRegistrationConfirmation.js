@@ -55,7 +55,7 @@ function ClubRegistrationConfirmation(props) {
 
     const sendDogData = async () => {
       for (const dog of dogs) {
-        if (!dog.file) {
+        if ( dog.file === undefined || dog.file.length === 0) {
         } else {
           dog.pdfUrl = await APIService.getPdfUrl(dog.file);
         }

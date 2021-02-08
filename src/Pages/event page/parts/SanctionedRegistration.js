@@ -60,7 +60,7 @@ function SanctionedRegistration(props) {
   
 
   const findDogBySanctionId = () => {
-    const sanctionId = document.getElementById("sanction").value;
+    const sanctionId = document.getElementById("sanction").value.toLowerCase();
 
     for (const dog of addedDogs) {
       if (sanctionId === dog.sanctionId) {

@@ -3,8 +3,6 @@ import { Form, Button, Header, Segment } from "semantic-ui-react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { format } from "date-fns";
 import APIService from "../../../helpers/apiCalls";
-import { throttle, debounce } from "throttle-debounce";
-import { apiContext } from "../../../App";
 
 // import { storageRef } from "../../../firebase";
 // import { apiUrl } from "../../helpers/backend";
@@ -50,7 +48,7 @@ function ClubRegistrationConfirmation(props) {
   //execute only when payment process is done
   //fires off when component re-renders
 
-  if (success && api === 0 && counter === 0) {
+  if (success) {
     console.log("call");
 
     const sendDogData = async () => {
@@ -65,8 +63,7 @@ function ClubRegistrationConfirmation(props) {
         data: { owner, dogs, secondary },
       });
 
-      setApi(api + 1);
-      setCounter(counter + 1);
+     
 
       // console.log("this is newDogs", newDogs);
 

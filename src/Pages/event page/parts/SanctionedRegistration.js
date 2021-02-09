@@ -25,11 +25,24 @@ function SanctionedRegistration(props) {
   const history = useHistory();
 
   const onSubmit = async () => {
-    history.push("/confirm", {
+    const res = await APIService.checkIfEventRegistered({eventId: props.eventId, sanctioned: addedDogs})
+    if (res === true) {
+       history.push("/confirm", {
       eventId: props.eventId,
       sanctionedEventRegistration: addedDogs,
       sanctionedPrice: props.sanctionedPrice,
     });
+    } else {
+      const response = await res.json()
+     console.log(response.response);
+     const messageResponse = response.response
+     for (const item of messageResponse) {
+       setMessage([message, item.callName] + ' already registered for this event ')
+     }
+    }
+    //check to see if dog was previously entered
+    //API call to server to check for dogs
+   
   };
 
   const findDogByCallName = () => {
@@ -124,7 +137,6 @@ function SanctionedRegistration(props) {
                 <input
                   id="sanction"
                   onChange={findDogBySanctionId}
-                  required
                   type="text"
                   defaultValue={sanction}
                   placeholder="Sanction ID"

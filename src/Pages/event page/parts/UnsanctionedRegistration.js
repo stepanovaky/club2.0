@@ -32,11 +32,21 @@ function UnsanctionedRegistration(props) {
   }, []);
 
   const onSubmit = async (data) => {
+     const res = await APIService.checkIfEventRegistered({eventId: props.eventId, unsanctioned: addedDogs})
+    if (res === true) {
     history.push("/confirm", {
       eventId: props.eventId,
       nonsanctionedEventRegistration: data,
       nonsanctionedPrice: props.unsanctionedPrice,
     });
+    } else {
+      const response = await res.json()
+     console.log(response.response);
+     const messageResponse = response.response
+     for (const item of messageResponse) {
+       setMessage([message, item.callName] + ' already registered for this event ')
+     }
+    }
   };
   return (
     <div className="nonsanctioned-registration">

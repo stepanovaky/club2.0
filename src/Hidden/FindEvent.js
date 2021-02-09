@@ -9,6 +9,8 @@ function FindEvent() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState();
   const [message, setMessage] = useState("");
+
+  console.log(selectedEvent? selectedEvent: null)
   // const fetchEvents = async () => {
   //   const getRequest = await fetch(`${apiUrl}/api/events`);
 
@@ -66,9 +68,15 @@ function FindEvent() {
   };
 
   const onSubmit = async (data) => {
-    const url = await APIService.getPdfUrl(data.eventPdf);
-    data.eventPdfUrl = url;
+    if (selectedEvent.pdfUrl === undefined) {
+      const url = await APIService.getPdfUrl(data.eventPdf);
+       data.eventPdfUrl = url;
     const res = APIService.updateEvents(data);
+    } else {
+      const res = APIService.updateEvents(data);
+    }
+    
+   
     setMessage("Event successfully updated");
   };
 
@@ -133,6 +141,9 @@ function FindEvent() {
               <label>
                 Price of Sanctioned Dog Registration:
                 <input
+                defaultValue={
+                  selectedEvent!== undefined? selectedEvent.sanctionedPrice : null
+                }
                   type="number"
                   placeholder="Sanctioned Price"
                   name="sanctionedPrice"
@@ -144,6 +155,9 @@ function FindEvent() {
               <label>
                 Price of Unsanctioned Dog Registration:
                 <input
+                defaultValue = {
+                  selectedEvent !== undefined? selectedEvent.unsanctionedPrice: null
+                }
                   type="number"
                   placeholder="Unsanctioned Price"
                   name="unsanctionedPrice"
@@ -159,6 +173,7 @@ function FindEvent() {
                 {" "}
                 Add .pdf file
                 <input
+                defaultValue={selectedEvent !== undefined ? selectedEvent.pdfUrl: null}
                   ref={register}
                   name="eventPdf"
                   type="file"

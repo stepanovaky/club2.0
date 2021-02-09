@@ -3,8 +3,8 @@ import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
 import UnsanctionedRegistration from "../Pages/event page/parts/UnsanctionedRegistration";
 
-// const apiUrl = "http://localhost:8000";  
-const apiUrl = "https://club20.herokuapp.com"; 
+const apiUrl = "http://localhost:8000";  
+// const apiUrl = "https://club20.herokuapp.com"; 
 window.localStorage.setItem("throttle", "true");
 const APIService = {
   async getPdfUrl(file) {
@@ -120,6 +120,24 @@ const APIService = {
       body: JSON.stringify(data),
     });
   },
+
+  async checkIfEventRegistered(data) {
+    const checkRequest = await fetch(`${apiUrl}/api/check/event`, {
+      method: 'GET',
+    
+    headers: {
+      "Content-Type": "application/json",
+      data: JSON.stringify(data),
+    }}
+    )
+    if (checkRequest.status === 409) {
+      return checkRequest
+    } else {
+      return true
+    }
+
+  },
+
   async sanctionedRegistration(object) {
     
     if (window.localStorage.getItem("throttle") === "true") {

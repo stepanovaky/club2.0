@@ -26,7 +26,7 @@ function SanctionedRegistration(props) {
 
   const onSubmit = async () => {
     const res = await APIService.checkIfEventRegistered({eventId: props.eventId, sanctioned: addedDogs})
-    if (res === true) {
+    if (res === true && res.length >= 1) {
        history.push("/confirm", {
       eventId: props.eventId,
       sanctionedEventRegistration: addedDogs,

@@ -11,7 +11,7 @@ import {
   Divider,
 } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
-import APIService from '../../helpers/apiCalls'
+import APIService from '../../../helpers/apiCalls'
 
 function UnsanctionedRegistration(props) {
   const history = useHistory();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -11,10 +11,12 @@ import {
   Divider,
 } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
+import APIService from '../../helpers/apiCalls'
 
 function UnsanctionedRegistration(props) {
   const history = useHistory();
   const { control, register, handleSubmit } = useForm();
+  const [message, setMessage] = useState();
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -32,7 +34,8 @@ function UnsanctionedRegistration(props) {
   }, []);
 
   const onSubmit = async (data) => {
-     const res = await APIService.checkIfEventRegistered({eventId: props.eventId, unsanctioned: addedDogs})
+    console.log(data);
+     const res = await APIService.checkIfEventRegistered({eventId: props.eventId, unsanctioned: data.dogs})
     if (res === true) {
     history.push("/confirm", {
       eventId: props.eventId,

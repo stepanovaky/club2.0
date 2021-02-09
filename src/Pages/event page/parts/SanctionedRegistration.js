@@ -32,7 +32,7 @@ function SanctionedRegistration(props) {
       sanctionedEventRegistration: addedDogs,
       sanctionedPrice: props.sanctionedPrice,
     });
-    } else {
+    } else if (res !== true){
       const response = await res.json()
      console.log(response.response);
      const messageResponse = response.response

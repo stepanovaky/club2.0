@@ -138,6 +138,22 @@ const APIService = {
 
   },
 
+  async getEventInfo(id) {
+    console.log(id.eventId);
+
+    const getInfo = await fetch(`${apiUrl}/api/info/event`, {
+      method: 'GET',
+      headers: {
+        "Content-Type":"application/json",
+        data: JSON.stringify(id.eventId)
+      }
+    }) 
+
+    return getInfo 
+    
+
+  },
+
   async sanctionedRegistration(object) {
     
     if (window.localStorage.getItem("throttle") === "true") {
@@ -175,6 +191,11 @@ const APIService = {
   async getLogs() {
     const getLogs = await fetch(`${apiUrl}/api/get/all/logs`);
     return getLogs;
+  },
+
+  async downloadLog() {
+    const getDownload = await fetch (`${apiUrl}/api/get/all/logs/excel`)
+    return getDownload
   },
 };
 

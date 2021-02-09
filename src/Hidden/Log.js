@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Pagination, Button } from "semantic-ui-react";
+import { Pagination, Button, Segment } from "semantic-ui-react";
 import { format, addDays } from "date-fns";
 import APIService from "../helpers/apiCalls";
 import { Link } from "react-router-dom";
@@ -121,7 +121,9 @@ function Log() {
     const classes = useRowStyles();
 
     return (
+     
       <React.Fragment>
+       
         <TableRow className={classes.root}>
           <TableCell>
             <IconButton
@@ -200,6 +202,7 @@ function Log() {
           </TableCell>
         </TableRow>
       </React.Fragment>
+      
     );
   }
 
@@ -256,9 +259,8 @@ function Log() {
           </Table>
         </TableContainer>
 
-      
       </div>
-    </div>
+      </div>
   );
 }
 

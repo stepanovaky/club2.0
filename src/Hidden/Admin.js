@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useFieldArray } from "react-hook-form";
-import { Menu, Segment, Form } from "semantic-ui-react";
+import APIService from '../helpers/apiCalls'
+import { Menu, Segment, Form, Button } from "semantic-ui-react";
 import FindDog from "./FindDog";
 import FindOwner from "./FindOwner";
 import RegisterEvent from "./RegisterEvent";
@@ -13,9 +14,21 @@ import Log from "./Log";
 function Admin() {
   const [activeItem, setActiveItem] = useState();
 
+  const handleDownload = async () => {
+  const res = await APIService.downloadLog()
+  console.log(res);
+  window.open(res.url, "_self")
+
+}
+
+
   return (
     <div className="admin">
       <div className="container">
+        <Segment>
+ <Button onClick={handleDownload}>Download Log</Button> 
+
+          </Segment>
         {/* <div className="frame"> */}
         <div className="retrieve-data">
           <Segment inverted>

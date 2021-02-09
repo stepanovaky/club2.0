@@ -82,9 +82,15 @@ function FindEvent() {
 
   const { register, handleSubmit, errors } = useForm();
  
+ const downloadInfo = async () => {
+   const res = await APIService.getEventInfo(selectedEvent);
+   window.open(res.url, "_self")
+
+ }
 
   return (
     <div className="find-event">
+      <Button onClick={downloadInfo}>Get Event Registration Information</Button>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Container>
           <Form.Field>

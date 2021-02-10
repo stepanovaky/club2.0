@@ -18,8 +18,8 @@ function PaymentContainer(props) {
               shape: "pill",
               size: "25",
             }}
-            // amount={props.userPays}
-            amount="0.01"
+            amount={props.userPays}
+            // amount="0.01"
             options={{
               shippingPreference: "NO_SHIPPING",
             }}

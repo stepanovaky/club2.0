@@ -3,8 +3,8 @@ import storageRef from "../firebase/firebase";
 import FindDog from "../Hidden/FindDog";
 import UnsanctionedRegistration from "../Pages/event page/parts/UnsanctionedRegistration";
 
-// const apiUrl = "http://localhost:8000";  
-const apiUrl = "https://club20.herokuapp.com"; 
+const apiUrl = "http://localhost:8000";  
+// const apiUrl = "https://club20.herokuapp.com"; 
 window.localStorage.setItem("throttle", "true");
 const APIService = {
   async getPdfUrl(file) {
@@ -130,6 +130,7 @@ const APIService = {
       data: JSON.stringify(data),
     }}
     )
+    console.log(checkRequest);
     if (checkRequest.status === 409) {
       return checkRequest
     } else {

@@ -26,19 +26,19 @@ function SanctionedRegistration(props) {
 
   const onSubmit = async () => {
     const res = await APIService.checkIfEventRegistered({eventId: props.eventId, sanctioned: addedDogs})
-    if (res === true && res.length >= 1) {
-       history.push("/confirm", {
-      eventId: props.eventId,
-      sanctionedEventRegistration: addedDogs,
-      sanctionedPrice: props.sanctionedPrice,
-    });
-    } else if (res !== true || res.length === 0){
+    if (res === true) {
+      history.push('/confirm', {
+        eventId : props.eventId,
+        sanctionedEventRegistration: addedDogs,
+        sanctionedPrice : props.sanctionedPrice,
+      });
+    } else if (res !== true) {
       const response = await res.json()
-     console.log(response.response);
-     const messageResponse = response.response
-     for (const item of messageResponse) {
-       setMessage([message, item.callName] + ' already registered for this event ')
-     }
+      console.log(response.response);
+      const messageResponse = response.response
+      for (const item of messageResponse) {
+        setMessage([message, item.callName] + ' already registered for this event ')
+      }
     }
     //check to see if dog was previously entered
     //API call to server to check for dogs

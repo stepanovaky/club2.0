@@ -36,7 +36,7 @@ function ConfirmationPage(props) {
 
   useEffect(() => {
     if (props.location.state.clubRegistration) {
-      setPrice(15);
+      setPrice(10);
     } else if (props.location.state.sanctionedEventRegistration) {
       setPrice(props.location.state.sanctionedPrice);
     } else {

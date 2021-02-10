@@ -36,14 +36,14 @@ function NestedRegistrationForm() {
   return (
     <div>
       <Container text>
-        <Header as="h1">Owner and Dog Registration</Header>
+        <Header as="h1">Owner and Dog Sanction Application</Header>
         <p>
           Primary owners own all the added dogs and will be notified every time
           a dog is registered for an event. Secondary owners can be customized
           to the dog and also have the ability to register a dog for an event.
           You can only add two secondary owners per dog.
         </p>
-        <p>$15 per dog added</p>
+        <p>$10 per dog added</p>
         <p>* fields are required</p>
       </Container>
       <div className="registration-container">

@@ -36,6 +36,7 @@ function UnsanctionedRegistration(props) {
   const onSubmit = async (data) => {
     console.log(data);
      const res = await APIService.checkIfEventRegistered({eventId: props.eventId, unsanctioned: data.dogs})
+     console.log(res);
     if (res === true) {
     history.push("/confirm", {
       eventId: props.eventId,

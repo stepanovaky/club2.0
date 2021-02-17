@@ -36,7 +36,7 @@ function Footer() {
                   <FaFacebook id="footer-navigation" size="2em" />{" "}
                 </a>
                
-              </h6> <a style={{color: '#aba5b4'}} href="mailto: cfsracingclub@gmail.com">Send Email</a>
+              </h6> <a style={{color: '#aba5b4'}} href="mailto: cfsracingclub@gmail.com">Send Email: cfsracingclub@gmail.com</a>
             </div>
           </div>
           <div className="footer-bottom"></div>
